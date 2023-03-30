@@ -1,23 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './styles/App.css'
-import Layout from "./pages/Layout.jsx";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Stats from "./pages/Stats";
+import Layout from "./pages/Layout";
 import Placeholder from "./pages/Placeholder";
+import Stats from "./pages/Stats";
+import "./styles/App.css";
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<Home></Home>}></Route>
-          <Route path="/statistics" element={<Stats></Stats>}></Route>
-          <Route path="/placeholder" element={<Placeholder></Placeholder>}></Route>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/statistics" element={<Stats />} />
+          <Route path="/placeholder" element={<Placeholder />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
