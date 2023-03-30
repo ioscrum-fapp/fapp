@@ -25,3 +25,8 @@ ul {
   .active {
     background-color: #04AA6D;
   }
+  img{
+    padding-top: 0.5vh;
+    height: 3vh;
+    width: 3vw;
+  }
