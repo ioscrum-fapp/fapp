@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "John"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "value": 1.23,
+      "date": "",
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ]
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "value": 1.23,
+      "date": "",
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ]
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "value": 1.23,
+      "date": "",
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ]
+    },
+    {
+      "id": "c2dbd1df-d35e-4a1d-ad01-98f3084e1cff",
+      "user_id": 1,
+      "value": "444",
+      "date": "2023-04-14T09:52",
+      "tags": []
+    },
+    {
+      "id": "8e7b5a45-1dc7-4c9d-9d69-f1e89ca2d292",
+      "user_id": 1,
+      "value": "777",
+      "date": "2023-04-14T09:53",
+      "tags": []
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "name": "test account 2",
+      "balance": 1234
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "name": "test account 2",
+      "balance": 1234
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "name": "test account 3",
+      "balance": 1234
+    },
+    {
+      "id": "ae0ac308-b962-4a56-bf7d-9a1947965c1b",
+      "user_id": 1,
+      "name": "test 4",
+      "balance": "10.09"
+    }
+  ]
+}
