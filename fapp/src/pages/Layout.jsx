@@ -9,7 +9,7 @@ export default function Layout() {
       <nav>
         <ul>
           <li>
-            <img src={Logo} alt="logo" />
+            <img src={Logo} alt="logo"/>
           </li>
           <li>
             <Link to="/">Home</Link>
