@@ -14,6 +14,7 @@ const CreateExpense = () => {
     // console.warn(formattedDate)
 
     const [value, setValue] = useState('');
+    const [date, setDate] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -24,6 +25,7 @@ const CreateExpense = () => {
                 id: new_uuid,
                 user_id: user_id,
                 value: value,
+                date: date,
                 tags: [] // todo tags
             };
 
@@ -48,6 +50,13 @@ const CreateExpense = () => {
                     step="0.01"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                />
+                <label>Date:</label>
+                <input
+                    required
+                    type="datetime-local"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                 />
                 <button>Create</button>
             </form>
