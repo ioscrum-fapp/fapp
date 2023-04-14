@@ -12,6 +12,14 @@ const Expense = () => {
     const { json, isFinished, error } = useFetch(expense_url);
     const navigate = useNavigate();
 
+    const handleClick = () => {
+        fetch(expense_url, {
+            method: 'DELETE'
+        }).then(() => {
+            navigate('/expenses');
+        })
+    }
+
     return (
         <div className="Account" >
             Expense component
@@ -22,6 +30,7 @@ const Expense = () => {
             { json && <h2>Value: { currency } { json.value }</h2> }
             { json && <h2>Date: { json.date }</h2> }
             { json && <p>Tags: { json.tags }</p> }
+            { json && <button onClick={handleClick}>Remove</button> }
         </div>
     );
 
