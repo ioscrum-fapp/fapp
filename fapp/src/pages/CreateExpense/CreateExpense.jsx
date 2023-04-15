@@ -2,10 +2,9 @@ import React from "react";
 import "./CreateExpense.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuid } from "uuid";
+import { CreateNewExpense } from "../../backend/expenseLogic";
 
-const url = "http://localhost:3030/expenses/";
-const user_id = 1;
+const userId = 1;
 
 const CreateExpense = () => {
   const [value, setValue] = useState("");
@@ -14,46 +13,30 @@ const CreateExpense = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const new_uuid = uuid();
-    const expense = {
-      id: new_uuid,
-      user_id: user_id,
-      value: value,
-      date: date,
-      tags: [], // todo tags
-    };
-
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(expense),
-    }).then(() => {
-      navigate("/expenses/" + new_uuid);
-    });
+    CreateNewExpense(navigate, userId, value, date, tags);
   };
 
   return (
     <div className="CreateExpense">
-      CreateExpense Component
-      <h1>Add new expense</h1>
+      CreateExpense Component <h1> Add new expense </h1>{" "}
       <form onSubmit={handleSubmit}>
-        <label>Value:</label>
+        <label> Value: </label>{" "}
         <input
           required
           type="number"
           step="0.01"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-        />
-        <label>Date:</label>
+        />{" "}
+        <label> Date: </label>{" "}
         <input
           required
           type="datetime-local"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-        />
-        <button>Create</button>
-      </form>
+        />{" "}
+        <button> Create </button>{" "}
+      </form>{" "}
     </div>
   );
 };
