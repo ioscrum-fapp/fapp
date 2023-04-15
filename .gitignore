@@ -1,0 +1,4 @@
+.vscode/
+.idea/
+coverage/
+fapp/data/db.json
