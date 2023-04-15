@@ -11,33 +11,21 @@
       "user_id": 1,
       "value": 1.23,
       "date": "",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ]
+      "tags": ["tag 1", "tag 2", "tag 3"]
     },
     {
       "id": 2,
       "user_id": 1,
       "value": 1.23,
       "date": "",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ]
+      "tags": ["tag 1", "tag 2", "tag 3"]
     },
     {
       "id": 3,
       "user_id": 2,
       "value": 1.23,
       "date": "",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ]
+      "tags": ["tag 1", "tag 2", "tag 3"]
     },
     {
       "id": "c2dbd1df-d35e-4a1d-ad01-98f3084e1cff",

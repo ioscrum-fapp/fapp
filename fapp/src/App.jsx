@@ -15,27 +15,27 @@ import CreateAccount from "./pages/CreateAccount/CreateAccount.jsx";
 import CreateExpense from "./pages/CreateExpense/CreateExpense.jsx";
 
 function App() {
-      return (
-          <BrowserRouter>
-              <div className="App">
-                  App component
-                  <Navbar />
-                  <Routes>
-                        <Route path="/" element={<Layout />} />
-                        <Route index element={<Home />} />
-                        <Route path="/accounts" element={<Accounts />} />
-                        <Route path="/accounts/:id" element={<Account/>} />
-                        <Route path="/accounts/add" element={<CreateAccount/>} />
-                        <Route path="/expenses" element={<Expenses />} />
-                        <Route path="/expenses/:id" element={<Expense/>} />
-                        <Route path="/expenses/add" element={<CreateExpense/>} />
-                        <Route path="/statistics" element={<Stats />} />
-                        <Route path="/placeholder" element={<Placeholder />} />
-                        <Route path="*" element={<NoPage />} />
-                  </Routes>
-              </div>
-          </BrowserRouter>
-      );
+  return (
+    <BrowserRouter>
+      <div className="App">
+        App component
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Layout />} />
+          <Route index element={<Home />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/accounts/:id" element={<Account />} />
+          <Route path="/accounts/add" element={<CreateAccount />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/expenses/:id" element={<Expense />} />
+          <Route path="/expenses/add" element={<CreateExpense />} />
+          <Route path="/statistics" element={<Stats />} />
+          <Route path="/placeholder" element={<Placeholder />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
