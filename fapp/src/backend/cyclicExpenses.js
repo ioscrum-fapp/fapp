@@ -43,7 +43,7 @@ export async function updateCyclicExpense(expenseId, expenseAttributes) {
   });
 }
 
-export function getClosestDateOfExpense(expense, dateFrom) {
+export function getClosestDateOfCyclicExpense(expense, dateFrom) {
   const { type } = expense;
   if (type === CYCLIC_TYPE.DAY) {
     return moment(dateFrom).startOf("day");
