@@ -44,7 +44,7 @@ export async function updateCyclicExpense(expenseId, expenseAttributes) {
 }
 
 export function getClosestDateOfExpense(expense, dateFrom) {
-  const type = expense.cyclicType;
+  const {type} = expense;
   if (type === CYCLIC_TYPE.DAY) {
     return moment(dateFrom).startOf("day");
   }
