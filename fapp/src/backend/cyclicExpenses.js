@@ -44,7 +44,7 @@ export async function updateCyclicExpense(expenseId, expenseAttributes) {
 }
 
 export function getClosestDateOfExpense(expense, dateFrom) {
-  const {type} = expense;
+  const { type } = expense;
   if (type === CYCLIC_TYPE.DAY) {
     return moment(dateFrom).startOf("day");
   }
@@ -64,7 +64,7 @@ export function getClosestDateOfExpense(expense, dateFrom) {
         res = startDate.clone().add(i, "months");
         break;
       default:
-        throw new Error(`Unsupported cyclic expense type "${type}"`)
+        throw new Error(`Unsupported cyclic expense type "${type}"`);
     }
   }
 
