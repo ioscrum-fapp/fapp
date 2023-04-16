@@ -67,5 +67,31 @@
       "name": "test 4",
       "balance": "10.09"
     }
+  ],
+  "cyclicExpenses": [
+    {
+      "id": "438cebc9-19e9-41f1-8cdd-2c56bb13f5b8",
+      "userId": 1,
+      "value": 55.26,
+      "isIncome": false,
+      "type": "day",
+      "startDate": "2023-04-16T17:41:30+0000"
+    },
+    {
+      "id": "0b53221e-029a-4d0f-9862-63ddad34313f",
+      "userId": 1,
+      "value": 523.52,
+      "isIncome": true,
+      "type": "month",
+      "startDate": "2023-04-16T17:41:30+0000"
+    },
+    {
+      "id": "00a607db-1587-4605-bfb0-9a994d1e3311",
+      "userId": 1,
+      "value": 996.01,
+      "isIncome": false,
+      "type": "week",
+      "startDate": "2023-04-16T17:41:30+0000"
+    }
   ]
 }
