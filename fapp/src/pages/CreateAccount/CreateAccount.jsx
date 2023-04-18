@@ -2,7 +2,7 @@ import React from "react";
 import "./CreateAccount.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateNewAccount } from "../../backend/accountsLogic";
+import CreateNewAccount from "../../backend/accountsLogic";
 
 const userId = 1;
 
