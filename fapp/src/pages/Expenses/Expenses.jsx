@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const url = "http://localhost:3030/expenses?user_id=";
 const user_id = 1;
 
-const Expenses = () => {
+export default function Expenses() {
   const expense_url = url + user_id;
   const { json, isFinished, error } = useFetch(expense_url);
 
@@ -21,5 +21,3 @@ const Expenses = () => {
     </div>
   );
 };
-
-export default Expenses;
