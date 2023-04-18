@@ -8,6 +8,7 @@ export async function createPlannedExpense(userId, value, date, isIncome) {
   const expense = {
     id,
     userId,
+    value,
     date: moment(date).toISOString(),
     isIncome,
   };
