@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 const expensesRoute = "/expenses/";
 const url = "http://localhost:3030/expenses/";
 
-exportz function CreateNewExpense(navigate, userId, value, date, tags) {
+export function CreateNewExpense(navigate, userId, value, date, tags) {
   const newUuid = uuid();
   const expense = {
     id: newUuid,
