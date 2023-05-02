@@ -3,13 +3,13 @@ import { v4 as uuid } from "uuid";
 const accountsRoute = "/accounts/";
 const url = "http://localhost:3030/accounts/";
 
-export function CreateNewAccount(navigate, userId, name, balance) {
+export default function CreateNewAccount(navigate, userId, name, balance) {
   const newUuid = uuid();
   const account = {
     id: newUuid,
     user_id: userId,
-    name: name,
-    balance: balance,
+    name,
+    balance,
   };
 
   fetch(url, {
