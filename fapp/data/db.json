@@ -93,5 +93,21 @@
       "type": "week",
       "startDate": "2023-04-16T17:41:30+0000"
     }
+  ],
+  "plannedExpenses": [
+    {
+      "id": "54249427-8ef7-4e15-927a-f2c490f41798",
+      "userId": 1,
+      "value": 90.62,
+      "date": "2023-06-16T17:41:30+0000",
+      "isIncome": false
+    },
+    {
+      "id": "1e5ab4d9-3b01-4a55-ad17-a30066390bb3",
+      "userId": 1,
+      "value": 50.61,
+      "date": "2023-05-26T17:41:30+0000",
+      "isIncome": true
+    }
   ]
 }
