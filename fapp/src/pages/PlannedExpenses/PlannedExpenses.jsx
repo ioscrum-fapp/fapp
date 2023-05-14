@@ -49,9 +49,7 @@ export default function PlannedExpenses() {
               </div>
               <div className="ExpenseDate">{e.date.format("YYYY-MM-DD")}</div>
               {e.type && (
-                <div className="ExpenseDate">
-                  {CYCLIC_PROMPTS[e.type]}
-                </div>
+                <div className="ExpenseDate">{CYCLIC_PROMPTS[e.type]}</div>
               )}
             </div>
           ))
