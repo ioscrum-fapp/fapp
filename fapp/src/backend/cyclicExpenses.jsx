@@ -9,6 +9,12 @@ export const CYCLIC_TYPE = Object.freeze({
   MONTH: "month",
 });
 
+export const CYCLIC_PROMPTS = Object.freeze({
+  [CYCLIC_TYPE.DAY]: "Repeats every day",
+  [CYCLIC_TYPE.WEEK]: "Repeats every week",
+  [CYCLIC_TYPE.MONTH]: "Repeats every month"
+})
+
 export async function createCyclicExpense(
   userId,
   value,
