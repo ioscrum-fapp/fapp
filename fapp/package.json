@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "format": "npx prettier --write .",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "db": "npx json-server --watch ./data/db.json --port 3030"
   },
   "dependencies": {
     "@vitejs/plugin-react-swc": "^3.0.0",
