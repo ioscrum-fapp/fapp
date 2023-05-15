@@ -15,10 +15,12 @@ export default function Layout() {
   };
   return (
     <div className="NavMenu">
-      <div className={`Hamburger ${isOpen ? "active" : ""}`} onClick={toggle}>
-        <span className="Line"></span>
-        <span className="Line"></span>
-        <span className="Line"></span>
+      <div className="HamburgerContainer">
+        <div className={`Hamburger ${isOpen ? "active" : ""}`} onClick={toggle}>
+          <span className="Line"></span>
+          <span className="Line"></span>
+          <span className="Line"></span>
+        </div>
       </div>
       <nav className={`Menu ${isOpen ? "open" : ""}`}>
         <ul>
