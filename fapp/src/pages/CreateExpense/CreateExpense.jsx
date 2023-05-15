@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import "./CreateExpense.css";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CreateNewExpense from "../../backend/expenseLogic";
+import { CreateNewExpense } from "../../backend/expenseLogic";
 import useFetch from "../../hooks/useFetch";
+import "./CreateExpense.css";
 
 const userId = 1;
 const url = "http://localhost:3030/accounts?user_id=";
@@ -23,16 +22,27 @@ export default function CreateExpense() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    CreateNewExpense(navigate, userId, value, date, undefined, selectedAccount);
+    //console.log(selectedAccount);
+    //tags are temporary an empty list TODO change that
+    CreateNewExpense(navigate, userId, value, date, [], selectedAccount);
+  };
+  const handleSelect = (e) => {
+    setSelectedAccount(e.target.value);
   };
 
-  useEffect(() => console.log(accountsJson), [accountsJson]);
+  useEffect(() => {
+    //console.log(accountsJson), 
+    [accountsJson];
+    if (accountsJson && !selectedAccount) {
+      setSelectedAccount(accountsJson[0].id);
+    }
+  });
 
   return (
     <div className="CreateExpense">
-      CreateExpense Component <h1> Add new expense </h1>{" "}
+      <h1> Add new expense </h1>
       <form onSubmit={handleSubmit}>
-        <label> Value: </label>{" "}
+        <label> Value: </label>
         <input
           required
           type="number"
@@ -40,13 +50,21 @@ export default function CreateExpense() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <label> Date: </label>{" "}
+        <label> Date: </label>
         <input
           required
           type="datetime-local"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
+        <label> Account: </label>
+        <select value={selectedAccount} onChange={handleSelect}>
+          {accountsJson?.map((account) => (
+            <option key={account.id} value={account.id}>
+              {account.name}
+            </option>
+          ))}
+        </select>
         <button type="submit"> Create </button>
       </form>
     </div>

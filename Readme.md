@@ -3,6 +3,7 @@
 ## Running app
 
 ### `npm install`
+
 ### `npm run dev`
 
 ## Running Fake DB API

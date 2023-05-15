@@ -14,7 +14,11 @@ export default function Expenses() {
   return (
     <div className="Expenses">
       <Link to="/expenses/add">
+<<<<<<< HEAD
         <button type="button" className="AddButton">Add Expense</button>
+=======
+        <button className="AddButton">Add Expense</button>
+>>>>>>> origin/develop
       </Link>
       {error && <div>{error}</div>}
       {!isFinished && <div>Downloading accounts...</div>}
