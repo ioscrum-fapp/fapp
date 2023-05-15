@@ -9,7 +9,9 @@ import Expenses from "./pages/Expenses/Expenses.jsx";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage/NoPage.jsx";
+import PlannedExpenses from "./pages/PlannedExpenses/PlannedExpenses";
 import "./styles/App.css";
+
 
 function App() {
   return (
@@ -24,8 +26,10 @@ function App() {
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/expenses/:id" element={<Expense />} />
             <Route path="/expenses/add" element={<CreateExpense />} />
+            <Route path="/planned" element={<PlannedExpenses />} />
             <Route path="*" element={<NoPage />} />
           </Route>
+
         </Routes>
       </div>
     </BrowserRouter>

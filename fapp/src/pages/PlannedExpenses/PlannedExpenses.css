@@ -1,0 +1,16 @@
+@import "../../styles/index.css";
+
+.PlannedExpenses .PlannedExpenseCard {
+  border: solid 2px var(--main-color);
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.PlannedExpenses .PlannedExpenseCard .ExpenseValue {
+  font-size: 1lh;
+}
+
+.PlannedExpenses .PlannedExpenseCard .ExpenseDate {
+  color: gray;
+}
