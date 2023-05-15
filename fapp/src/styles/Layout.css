@@ -19,10 +19,19 @@ li a:hover:not(.active) {
   background-color: var(--main-color);
 }
 .Hamburger {
+  position: fixed;
   display: none;
   cursor: pointer;
 }
+.Menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  border-bottom: solid 2px var(--main-color);
 
+}
 @media only screen and (max-width: 600px) {
   .Hamburger {
     display: block;
