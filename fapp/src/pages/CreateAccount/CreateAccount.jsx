@@ -2,18 +2,18 @@ import React from "react";
 import "./CreateAccount.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CreateNewAccount from "../../backend/accountsLogic";
+import { CreateNewAccount } from "../../backend/accountsLogic";
 
 const userId = 1;
 
-const CreateAccount = () => {
+export default function CreateAccount() {
   const [name, setName] = useState("");
   const [balance, setBalance] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    CreateNewAccount(navigate, userId, name, balance);
+    await CreateNewAccount(navigate, userId, name, balance);
   };
 
   return (
@@ -35,10 +35,8 @@ const CreateAccount = () => {
           value={balance}
           onChange={(e) => setBalance(e.target.value)}
         />{" "}
-        <button> Create </button>{" "}
+        <button type="button"> Create </button>{" "}
       </form>{" "}
     </div>
   );
-};
-
-export default CreateAccount;
+}

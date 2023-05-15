@@ -1,9 +1,9 @@
 import { v4 as uuid } from "uuid";
 
 const accountsRoute = "/accounts/";
-const url = "http://localhost:3030/accounts/";
+const BACKEND_URL = "http://localhost:3030/accounts/";
 
-export default function CreateNewAccount(navigate, userId, name, balance) {
+export async function CreateNewAccount(navigate, userId, name, balance) {
   const newUuid = uuid();
   const account = {
     id: newUuid,
@@ -12,11 +12,18 @@ export default function CreateNewAccount(navigate, userId, name, balance) {
     balance,
   };
 
-  fetch(url, {
+  fetch(BACKEND_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(account),
   }).then(() => {
     navigate(accountsRoute + newUuid);
+  });
+}
+
+export async function DeleteAccount(accountId) {
+  return fetch(BACKEND_URL + accountId, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
   });
 }
