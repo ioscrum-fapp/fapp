@@ -46,6 +46,10 @@ li a:hover:not(.active) {
   width: 100%;
   border-bottom: solid 2px var(--main-color);
 }
+.Contents {
+  margin-top: 6%;
+}
+
 @media only screen and (max-width: 600px) {
   .Hamburger {
     display: block;
