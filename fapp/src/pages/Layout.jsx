@@ -1,29 +1,43 @@
-import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { React, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import "../styles/Layout.css";
-import Logo from "../assets/Icon.svg";
+/*
+<li>
+  <img src={Logo} alt="logo" />
+</li>
+*/
 
 export default function Layout() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <>
-      <nav>
+    <div className="NavMenu">
+      <div className={`Hamburger ${isOpen ? "active" : ""}`} onClick={toggle}>
+        <span className="Line"></span>
+        <span className="Line"></span>
+        <span className="Line"></span>
+      </div>
+      <nav className={`Menu ${isOpen ? "open" : ""}`}>
         <ul>
-          <li>
-            <img src={Logo} alt="logo" />
-          </li>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/statistics">Statistics</Link>
+            <Link to="/accounts">Accounts</Link>
           </li>
           <li>
-            <Link to="/placeholder">Placeholder</Link>
+            <Link to="/expenses">Expenses</Link>
+          </li>
+          <li>
+            <Link to="/planned">Planned Expenses</Link>
           </li>
         </ul>
       </nav>
 
       <Outlet />
-    </>
+    </div>
   );
 }

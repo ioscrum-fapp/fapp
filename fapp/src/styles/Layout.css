@@ -4,10 +4,7 @@ ul {
   padding: 0;
   overflow: hidden;
   background-color: #000000;
-}
-
-li {
-  float: left;
+  display: flex;
 }
 
 li a {
@@ -19,9 +16,50 @@ li a {
 }
 
 li a:hover:not(.active) {
-  background-color: #35b365;
+  background-color: var(--main-color);
+}
+.Hamburger {
+  display: none;
+  cursor: pointer;
 }
 
-.active {
-  background-color: #04aa6d;
+@media only screen and (max-width: 600px) {
+  .Hamburger {
+    display: block;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .Hamburger .Line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: whitesmoke;
+    transition: all 0.3s ease-in-out;
+  }
+  .Hamburger.active .Line:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 11px);
+  }
+
+  .Hamburger.active .Line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .Hamburger.active .Line:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -11px);
+  }
+
+  ul {
+    flex-direction: column;
+  }
+  .Menu {
+    display: none;
+  }
+  .Menu.open {
+    display: block;
+  }
 }
