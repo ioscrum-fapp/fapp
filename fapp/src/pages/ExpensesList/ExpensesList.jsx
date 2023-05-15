@@ -9,11 +9,13 @@ function DaysAgo(date) {
 }
 
 function CreateExpense(expense) {
-  const {id, value, date, tags} = expense
+  const { id, value, date, tags } = expense;
   return (
     <div className="ExpenseList-element" key={id}>
       <Link className="DetailsLink" to={`/expenses/${id}`}>
-        <button type="button" className="DetailsButton">Details</button>
+        <button type="button" className="DetailsButton">
+          Details
+        </button>
       </Link>
       <div className="DetailsInfo">
         <h2>
