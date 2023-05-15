@@ -11,35 +11,60 @@
       "user_id": 1,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"]
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
+      "accountId": 1
     },
     {
       "id": 2,
       "user_id": 1,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"]
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
+      "accountId": 1
     },
     {
       "id": 3,
       "user_id": 2,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"]
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
+      "accountId": 1
     },
     {
       "id": "c2dbd1df-d35e-4a1d-ad01-98f3084e1cff",
       "user_id": 1,
       "value": "444",
       "date": "2023-04-14T09:52:00+0000",
-      "tags": []
+      "tags": [],
+      "accountId": 1
     },
     {
       "id": "8e7b5a45-1dc7-4c9d-9d69-f1e89ca2d292",
       "user_id": 1,
       "value": "777",
       "date": "2023-04-14T09:53:00+0000",
-      "tags": []
+      "tags": [],
+      "accountId": 1
+    },
+    {
+      "id": "c2cac35e-b08c-41ff-a36f-5f8d37629871",
+      "user_id": 1,
+      "value": "1",
+      "date": "2023-05-03T20:49:00.000Z",
+      "tags": [],
+      "accountId": "2"
     }
   ],
   "accounts": [
