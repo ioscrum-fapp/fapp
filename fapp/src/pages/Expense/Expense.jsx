@@ -2,22 +2,20 @@ import React from "react";
 import "./Expense.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch.jsx";
+import { DeleteExpense } from "../../backend/expenseLogic";
 
 const currency = "$";
 const url = "http://localhost:3030/expenses/";
 
-const Expense = () => {
+export default function Expense() {
   const { id } = useParams();
-  const expense_url = url + id;
-  const { json, isFinished, error } = useFetch(expense_url);
+  const expenseUrl = url + id;
+  const { json, isFinished, error } = useFetch(expenseUrl);
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    fetch(expense_url, {
-      method: "DELETE",
-    }).then(() => {
-      navigate("/expenses");
-    });
+  const handleClick = async () => {
+    await DeleteExpense(id);
+    navigate("/expenses");
   };
 
   return (
@@ -34,9 +32,11 @@ const Expense = () => {
       )}
       {json && <h2>Date: {json.date}</h2>}
       {json && <p>Tags: {json.tags}</p>}
-      {json && <button onClick={handleClick}>Remove</button>}
+      {json && (
+        <button className="RemoveButton" type="button" onClick={handleClick}>
+          Remove
+        </button>
+      )}
     </div>
   );
-};
-
-export default Expense;
+}
