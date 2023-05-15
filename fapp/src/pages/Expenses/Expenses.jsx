@@ -14,13 +14,11 @@ export default function Expenses() {
   return (
     <div className="Expenses">
       <Link to="/expenses/add">
-        <button className="AddButton">
-          Add Expense
-        </button>
+        <button className="AddButton">Add Expense</button>
       </Link>
       {error && <div>{error}</div>}
       {!isFinished && <div>Downloading accounts...</div>}
       {json && <ExpensesList expenses={json} />}
     </div>
   );
-};
+}

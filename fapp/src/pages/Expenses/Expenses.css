@@ -2,9 +2,9 @@
 }
 
 .AddButton {
-    border: solid 2px var(--main-color);
-    border-radius: 5px;
-    background-color: var(--main-dark-accent);
-    padding: 5px 10px;
-    cursor: pointer;
+  border: solid 2px var(--main-color);
+  border-radius: 5px;
+  background-color: var(--main-dark-accent);
+  padding: 5px 10px;
+  cursor: pointer;
 }
