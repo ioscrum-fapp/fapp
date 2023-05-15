@@ -18,13 +18,13 @@ li a {
 li a:hover:not(.active) {
   background-color: #278664;
 }
-.Hamburger{
+.Hamburger {
   display: none;
   cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
-  .Hamburger{
+  .Hamburger {
     display: block;
     height: 32px;
     width: 32px;
@@ -32,7 +32,6 @@ li a:hover:not(.active) {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 15px;
-
   }
   .Hamburger .Line {
     display: block;
@@ -45,22 +44,22 @@ li a:hover:not(.active) {
   .Hamburger.active .Line:nth-child(1) {
     transform: rotate(45deg) translate(8px, 11px);
   }
-  
+
   .Hamburger.active .Line:nth-child(2) {
     opacity: 0;
   }
-  
+
   .Hamburger.active .Line:nth-child(3) {
     transform: rotate(-45deg) translate(8px, -11px);
   }
-  
+
   ul {
     flex-direction: column;
   }
-  .Menu{
+  .Menu {
     display: none;
   }
-  .Menu.open{
+  .Menu.open {
     display: block;
   }
 }

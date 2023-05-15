@@ -12,7 +12,6 @@ import NoPage from "./pages/NoPage/NoPage.jsx";
 import PlannedExpenses from "./pages/PlannedExpenses/PlannedExpenses";
 import "./styles/App.css";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -29,7 +28,6 @@ function App() {
             <Route path="/planned" element={<PlannedExpenses />} />
             <Route path="*" element={<NoPage />} />
           </Route>
-
         </Routes>
       </div>
     </BrowserRouter>
