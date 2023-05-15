@@ -1,7 +1,7 @@
 import React from "react";
 import "./Expense.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch.jsx";
+import useFetch from "../../hooks/useFetch";
 import { DeleteExpense } from "../../backend/expenseLogic";
 
 const currency = "$";
@@ -19,24 +19,31 @@ export default function Expense() {
   };
 
   return (
-    <div className="Account">
-      Expense component
-      {error && <div>{error}</div>}
-      {!isFinished && <div>Downloading account...</div>}
-      {json && <h1>Expense</h1>}
-      {json && <Link to={`/expenses/`}>Go back</Link>}
+    <>
       {json && (
-        <h2>
-          Value: {currency} {json.value}
-        </h2>
+        <Link to="/expenses/">
+          <button type="button" className="Button">
+            Go back
+          </button>
+        </Link>
       )}
-      {json && <h2>Date: {json.date}</h2>}
-      {json && <p>Tags: {json.tags}</p>}
-      {json && (
-        <button className="RemoveButton" type="button" onClick={handleClick}>
-          Remove
-        </button>
-      )}
-    </div>
+      <div className="Account">
+        {error && <div>{error}</div>}
+        {!isFinished && <div>Downloading account...</div>}
+
+        {json && (
+          <h2>
+            {currency} {json.value}
+          </h2>
+        )}
+        {json && <h2>Date: {json.date}</h2>}
+        {json && <p>Tags: {json.tags.join(", ")}</p>}
+        {json && (
+          <button className="Button" type="button" onClick={handleClick}>
+            Remove
+          </button>
+        )}
+      </div>
+    </>
   );
 }
