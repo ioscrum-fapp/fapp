@@ -11,7 +11,11 @@
       "user_id": 1,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"],
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
       "accountId": 1
     },
     {
@@ -19,7 +23,11 @@
       "user_id": 1,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"],
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
       "accountId": 1
     },
     {
@@ -27,7 +35,11 @@
       "user_id": 2,
       "value": 1.23,
       "date": "2023-04-14T09:52:00+0000",
-      "tags": ["tag 1", "tag 2", "tag 3"],
+      "tags": [
+        "tag 1",
+        "tag 2",
+        "tag 3"
+      ],
       "accountId": 1
     },
     {
@@ -51,6 +63,14 @@
       "user_id": 1,
       "value": "1",
       "date": "2023-05-03T20:49:00.000Z",
+      "tags": [],
+      "accountId": "2"
+    },
+    {
+      "id": "5bef4d42-93ad-4808-b4df-622a20d34ab0",
+      "user_id": 1,
+      "value": "0.02",
+      "date": "2023-05-01T20:58:00.000Z",
       "tags": [],
       "accountId": "2"
     }

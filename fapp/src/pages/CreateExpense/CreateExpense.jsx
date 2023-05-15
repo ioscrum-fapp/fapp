@@ -31,7 +31,8 @@ export default function CreateExpense() {
   };
 
   useEffect(() => {
-    console.log(accountsJson), [accountsJson];
+    //console.log(accountsJson), 
+    [accountsJson];
     if (accountsJson && !selectedAccount) {
       setSelectedAccount(accountsJson[0].id);
     }
