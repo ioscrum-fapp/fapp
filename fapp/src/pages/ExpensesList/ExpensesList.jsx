@@ -9,17 +9,18 @@ function DaysAgo(date) {
 }
 
 function CreateExpense(expense) {
+  const {id, value, date, tags} = expense
   return (
-    <div className="ExpenseList-element" key={expense.id}>
-      <Link className="DetailsLink" to={`/expenses/` + expense.id}>
-        <button className="DetailsButton">Details</button>
+    <div className="ExpenseList-element" key={id}>
+      <Link className="DetailsLink" to={`/expenses/${id}`}>
+        <button type="button" className="DetailsButton">Details</button>
       </Link>
       <div className="DetailsInfo">
         <h2>
-          Value: {currency} {expense.value}
+          Value: {currency} {value}
         </h2>
-        <h4>{DaysAgo(expense.date)} days ago</h4>
-        <p>Tags: {expense.tags.join(", ")}</p>
+        <h4>{DaysAgo(date)} days ago</h4>
+        <p>Tags: {tags.join(", ")}</p>
       </div>
     </div>
   );
