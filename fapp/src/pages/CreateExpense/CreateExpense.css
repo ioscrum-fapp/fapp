@@ -1,2 +1,42 @@
-.CreateExpense {
+.AddingForm {
+  margin-bottom: 40px;
+  background-color: rgb(68, 68, 68);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formControl {
+  margin: 20px 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formControl label {
+  display: block;
+  font-size: 20px;
+}
+input,
+select {
+  width: 55%;
+  height: 5vh;
+  padding: 0.3px 0.7px;
+  font-size: 17px;
+  background-color: rgba(255, 255, 255, 0.445);
+  color: black;
+}
+.submitButton {
+  width: 55%;
+  height: 5vh;
+  padding: 0.3px 0.7px;
+  font-size: 17px;
+  background-color: var(--main-dark-accent);
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  input,
+  select,
+  .submitButton {
+    width: 90%;
+  }
 }
