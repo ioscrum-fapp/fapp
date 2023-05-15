@@ -6,10 +6,10 @@
   margin-bottom: 20px;
   display: block;
 }
-.AccountsList-element p{
-    font-size: 20px;
+.AccountsList-element p {
+  font-size: 20px;
 }
-.AccountdetailsLink{
+.AccountdetailsLink {
   text-decoration: none;
   color: white;
   float: right;

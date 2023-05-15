@@ -9,7 +9,7 @@ function CreateAccount(account) {
     <div className="AccountsList-element" key={account.id}>
       <Link className="AccountdetailsLink" to={`/accounts/` + account.id}>
         <button type="button" className="DetailsButton">
-            Details
+          Details
         </button>
       </Link>
       <h1>Account: {account.name}</h1>
