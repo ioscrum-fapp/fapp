@@ -13,6 +13,7 @@ import Expenses from "./pages/Expenses/Expenses.jsx";
 import Expense from "./pages/Expense/Expense.jsx";
 import CreateAccount from "./pages/CreateAccount/CreateAccount.jsx";
 import CreateExpense from "./pages/CreateExpense/CreateExpense.jsx";
+import PlannedExpenses from "./pages/PlannedExpenses/PlannedExpenses";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />} />
           <Route index element={<Home />} />
+          <Route path="/planned" element={<PlannedExpenses />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:id" element={<Account />} />
           <Route path="/accounts/add" element={<CreateAccount />} />
