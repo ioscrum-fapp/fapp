@@ -18,9 +18,9 @@ function CreateExpense(expense) {
         </button>
       </Link>
       <div className="DetailsInfo">
-        <h2>
-          Value: {currency} {value}
-        </h2>
+        <h1>
+          {currency} {value}
+        </h1>
         <h4>{DaysAgo(date)} days ago</h4>
         <p>Tags: {tags.join(", ")}</p>
       </div>
