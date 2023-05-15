@@ -1,15 +1,18 @@
 import React from "react";
-import "./AccountsList.css";
 import { Link } from "react-router-dom";
+import "./AccountsList.css";
 
 const currency = "$";
 
 function CreateAccount(account) {
   return (
     <div className="AccountsList-element" key={account.id}>
-      <Link to={`/accounts/` + account.id}>
-        <h1>Account: {account.name}</h1>
+      <Link className="AccountdetailsLink" to={`/accounts/` + account.id}>
+        <button type="button" className="DetailsButton">
+            Details
+        </button>
       </Link>
+      <h1>Account: {account.name}</h1>
       <p>
         Balance: {currency} {account.balance}
       </p>
@@ -20,7 +23,6 @@ function CreateAccount(account) {
 const AccountsList = ({ accounts }) => {
   return (
     <div className="AccountsList">
-      AccountsList Component
       {accounts && accounts.map(CreateAccount)}
     </div>
   );
