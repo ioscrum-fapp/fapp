@@ -19,10 +19,10 @@ export default function CreateAccount() {
       <h1> Add new account </h1>
       <div className="GoBackButton">
         <Link to="/accounts">
-            <button type="button" className="Button">
-              Go back
-            </button>
-          </Link>
+          <button type="button" className="Button">
+            Go back
+          </button>
+        </Link>
       </div>
       <form onSubmit={handleSubmit} className="AddingForm">
         <div className="formControl">
@@ -46,7 +46,10 @@ export default function CreateAccount() {
           />
         </div>
         <div className="formControl">
-          <button type="submit" className="submitButton"> Create </button>
+          <button type="submit" className="submitButton">
+            {" "}
+            Create{" "}
+          </button>
         </div>
       </form>
     </div>

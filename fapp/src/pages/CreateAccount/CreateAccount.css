@@ -1,48 +1,48 @@
 .AddingForm {
-    margin-bottom: 40px;
-    border: solid 5px var(--main-color);
-    border-radius: 15px;
-    background-color: black;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .formControl {
-    margin: 20px 0;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .formControl label {
-    display: block;
-    font-size: 25px;
-    
-  }
-  input{
-    width: 90%;
-    height: 5vh;
-    padding: 0.3px 0.7px;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.445);
-    color: black;
-    border-radius: 5px;
-  }
+  margin-bottom: 40px;
+  border: solid 5px var(--main-color);
+  border-radius: 15px;
+  background-color: black;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formControl {
+  margin: 20px 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formControl label {
+  display: block;
+  font-size: 25px;
+}
+input {
+  width: 90%;
+  height: 5vh;
+  padding: 0.3px 0.7px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.445);
+  color: black;
+  border-radius: 5px;
+}
+.submitButton {
+  width: 90%;
+  height: 5vh;
+  padding: 0.3px 0.7px;
+  font-size: 25px;
+  background-color: var(--main-color);
+  cursor: pointer;
+  border: solid 5px var(--main-color);
+  border-radius: 5px;
+}
+.GoBackButton {
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 600px) {
+  input,
   .submitButton {
-    width: 90%;
-    height: 5vh;
-    padding: 0.3px 0.7px;
-    font-size: 25px;
-    background-color: var(--main-color);
-    cursor: pointer;
-    border: solid 5px var(--main-color);
-    border-radius: 5px;
+    width: 55%;
   }
-  .GoBackButton{
-    margin-bottom: 10px;
-  }
-  @media only screen and (min-width: 600px) {
-    input,.submitButton{
-        width: 55%;
-    }
-  }  
+}
