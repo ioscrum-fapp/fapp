@@ -26,14 +26,14 @@ export default function CreateExpense() {
     //tags are temporary an empty list TODO change that
     CreateNewExpense(navigate, userId, value, date, [], selectedAccount);
   };
-  const handleSelect = (e) =>{
-    setSelectedAccount(e.target.value)
-  }
+  const handleSelect = (e) => {
+    setSelectedAccount(e.target.value);
+  };
 
-  useEffect(() =>{ 
+  useEffect(() => {
     console.log(accountsJson), [accountsJson];
-    if(accountsJson && !selectedAccount){
-      setSelectedAccount(accountsJson[0].id)
+    if (accountsJson && !selectedAccount) {
+      setSelectedAccount(accountsJson[0].id);
     }
   });
 
@@ -58,8 +58,10 @@ export default function CreateExpense() {
         />
         <label> Account: </label>
         <select value={selectedAccount} onChange={handleSelect}>
-          {accountsJson?.map((account) =>(
-            <option key={account.id} value={account.id}>{account.name}</option>
+          {accountsJson?.map((account) => (
+            <option key={account.id} value={account.id}>
+              {account.name}
+            </option>
           ))}
         </select>
         <button type="submit"> Create </button>
