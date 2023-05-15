@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./CreateExpense.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CreateNewExpense from "../../backend/expenseLogic";
+import { CreateNewExpense } from "../../backend/expenseLogic";
 import useFetch from "../../hooks/useFetch";
 
 const userId = 1;
