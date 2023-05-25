@@ -39,3 +39,7 @@ export function DateTimeToHumanReadableFormatDate(date) {
 export default function DateTimeToHumanReadableFormatDateTime(date) {
     return `${DateTimeToHumanReadableFormatDate(date)} ${DateTimeToHumanReadableFormatTime(date)}`;
 }
+
+export function DateTimeToJsFormat(date) {
+    return date.toISOString().split(".")[0];
+}

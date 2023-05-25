@@ -24,8 +24,12 @@ select {
   height: 5vh;
   padding: 0.3px 0.7px;
   font-size: 20px;
-  background-color: rgba(255, 255, 255, 0.445);
-  color: black;
+  background-color: black;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid 1px var(--main-color);
+  color: white;
   border-radius: 5px;
 }
 .submitButton {

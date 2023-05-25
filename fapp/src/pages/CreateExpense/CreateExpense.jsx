@@ -3,15 +3,15 @@ import {useNavigate, Link, useParams} from "react-router-dom";
 import {CreateNewExpense, EditExpense} from "../../backend/expenseLogic";
 import useFetch from "../../hooks/useFetch";
 import "./CreateExpense.css";
+import {DateTimeToJsFormat} from "../../backend/dateTimeLogic.jsx";
 
 const userId = 1;
 const url = "http://localhost:3030/accounts?user_id=";
 
 export default function CreateExpense() {
   const {id} = useParams();
-
-  const [value, setValue] = useState("");
-  const [date, setDate] = useState("");
+  const [value, setValue] = useState(undefined);
+  const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const navigate = useNavigate();
 
@@ -21,6 +21,11 @@ export default function CreateExpense() {
     isFinished: accountsIsFinished,
     error: accountsError,
   } = useFetch(accountUrl);
+  const {
+    json: expenseJson,
+    isFinished: expenseIsFinished,
+    error: expenseError
+  } = id ? useFetch(`http://localhost:3030/expenses/${id}`) : {json:null, isFinished:true, error:null};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +41,15 @@ export default function CreateExpense() {
     [accountsJson];
     if (accountsJson && !selectedAccount) {
       setSelectedAccount(accountsJson[0].id);
+    }
+  });
+
+  useEffect( () => {
+    [expenseJson];
+    if (expenseJson && !value) {
+      setValue(expenseJson.value);
+      setDate(DateTimeToJsFormat(new Date(expenseJson.date)));
+      setSelectedAccount(expenseJson.accountId);
     }
   });
 
@@ -66,7 +80,7 @@ export default function CreateExpense() {
                   required
                   type="datetime-local"
                   value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  onChange={(e) => {setDate(e.target.value);}}
               />
             </div>
             <div className="formControl">
