@@ -1,12 +1,9 @@
 import React from "react";
 import "./ExpensesList.css";
 import { Link } from "react-router-dom";
+import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
 
 const currency = "$";
-
-function DaysAgo(date) {
-  return Math.ceil((new Date() - Date.parse(date)) / 86400000);
-}
 
 function CreateExpense(expense) {
   const { id, value, date, tags } = expense;
@@ -21,7 +18,7 @@ function CreateExpense(expense) {
         <h1>
           {currency} {value}
         </h1>
-        <h4>{DaysAgo(date)} days ago</h4>
+        <h4>{DateTimeToHumanReadableFormatDateTime(new Date(date))}</h4>
         <p>Tags: {tags.join(", ")}</p>
       </div>
     </div>

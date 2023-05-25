@@ -3,6 +3,7 @@ import "./Expense.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { DeleteExpense } from "../../backend/expenseLogic";
+import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
 
 const currency = "$";
 const url = "http://localhost:3030/expenses/";
@@ -36,11 +37,11 @@ export default function Expense() {
         {!isFinished && <div>Downloading account...</div>}
 
         {json && (
-          <h2>
+          <h1>
             {currency} {json.value}
-          </h2>
+          </h1>
         )}
-        {json && <h2>Date: {json.date}</h2>}
+        {json && <h2>{DateTimeToHumanReadableFormatDateTime(new Date(json.date))}</h2>}
         {json && <p>Tags: {json.tags.join(", ")}</p>}
         <button className="Button" type="button" onClick={handleClickEdit}>
             Edit
