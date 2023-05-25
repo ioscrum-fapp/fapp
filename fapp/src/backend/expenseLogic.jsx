@@ -31,6 +31,33 @@ export function CreateNewExpense(
   });
 }
 
+export function EditExpense(
+    navigate,
+    userId,
+    value,
+    date,
+    tags,
+    accountId,
+    expenseId
+) {
+  const expense = {
+    id: expenseId,
+    user_id: userId,
+    value,
+    date: moment(date).toISOString(),
+    tags,
+    accountId,
+  };
+
+  fetch(BACKEND_URL + expenseId, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(expense),
+  }).then(() => {
+    navigate(expensesRoute + expenseId);
+  });
+}
+
 export async function DeleteExpense(expenseId) {
   return fetch(BACKEND_URL + expenseId, {
     method: "DELETE",

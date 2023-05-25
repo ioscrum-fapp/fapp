@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { CreateNewExpense } from "../../backend/expenseLogic";
+import {useNavigate, Link, useParams} from "react-router-dom";
+import {CreateNewExpense, EditExpense} from "../../backend/expenseLogic";
 import useFetch from "../../hooks/useFetch";
 import "./CreateExpense.css";
 
@@ -8,6 +8,8 @@ const userId = 1;
 const url = "http://localhost:3030/accounts?user_id=";
 
 export default function CreateExpense() {
+  const {id} = useParams();
+
   const [value, setValue] = useState("");
   const [date, setDate] = useState("");
   const [selectedAccount, setSelectedAccount] = useState(undefined);
@@ -23,7 +25,11 @@ export default function CreateExpense() {
   const handleSubmit = (e) => {
     e.preventDefault();
     //tags are temporary an empty list TODO change that
-    CreateNewExpense(navigate, userId, value, date, [], selectedAccount);
+
+    if (id)
+      EditExpense(navigate, userId, value, date, [], selectedAccount, id);
+    else
+      CreateNewExpense(navigate, userId, value, date, [], selectedAccount);
   };
 
   useEffect(() => {
@@ -34,56 +40,55 @@ export default function CreateExpense() {
   });
 
   return (
-    <>
-      <Link to="/expenses/">
-        <button type="button" className="Button">
-          Go back
-        </button>
-      </Link>
-      <div className="CreateExpense">
-        <h1> Add new expense </h1>
-        <form onSubmit={handleSubmit} className="AddingForm">
-          <div className="formControl">
-            <label> Value: </label>
-            <input
-              required
-              type="number"
-              step="0.01"
-              value={value}
-              min="0"
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </div>
-          <div className="formControl">
-            <label> Date: </label>
-            <input
-              required
-              type="datetime-local"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </div>
-          <div className="formControl">
-            <label> Account: </label>
-            <select
-              value={selectedAccount}
-              onChange={(e) => setSelectedAccount(e.target.value)}
-            >
-              {accountsJson?.map((account) => (
-                <option key={account.id} value={account.id}>
-                  {account.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="formControl">
-            <button type="submit" className="submitButton">
-              {" "}
-              Create{" "}
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+      <>
+        <Link to={id ? `/expenses/${id}` : "/expenses"}>
+          <button type="button" className="Button">
+            Go back
+          </button>
+        </Link>
+        <div className="CreateExpense">
+          <h1> {id ? "Edit expense" : "Add new expense"} </h1>
+          <form onSubmit={handleSubmit} className="AddingForm">
+            <div className="formControl">
+              <label> Value: </label>
+              <input
+                  required
+                  type="number"
+                  step="0.01"
+                  value={value}
+                  min="0"
+                  onChange={(e) => setValue(e.target.value)}
+              />
+            </div>
+            <div className="formControl">
+              <label> Date: </label>
+              <input
+                  required
+                  type="datetime-local"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <div className="formControl">
+              <label> Account: </label>
+              <select
+                  value={selectedAccount}
+                  onChange={(e) => setSelectedAccount(e.target.value)}
+              >
+                {accountsJson?.map((account) => (
+                    <option key={account.id} value={account.id}>
+                      {account.name}
+                    </option>
+                ))}
+              </select>
+            </div>
+            <div className="formControl">
+              <button type="submit" className="submitButton">
+                {id ? "Edit" : "Create"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </>
   );
 }
