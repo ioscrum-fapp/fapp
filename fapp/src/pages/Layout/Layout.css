@@ -5,18 +5,24 @@ ul {
   overflow: hidden;
   background-color: #000000;
   display: flex;
+  height: 50px;
 }
 
-li a {
+li a, li h1{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 0;
   text-decoration: none;
+  margin: 0;
+  width: 25vw;
+  border-radius: 10px 10px 0 0;
+  transition: all 0.2s ease-in-out;
 }
 
 li a:hover:not(.active) {
   background-color: var(--main-color);
+  transition: all 0.2s ease-in-out;
 }
 .HamburgerContainer {
   width: 100%;
@@ -30,8 +36,6 @@ li a:hover:not(.active) {
 }
 .Hamburger {
   position: fixed;
-  top: 2%;
-  left: 2%;
   display: none;
   cursor: pointer;
   width: 100%;
@@ -46,30 +50,34 @@ li a:hover:not(.active) {
   width: 100%;
   border-bottom: solid 2px var(--main-color);
 }
-.Contents {
-  margin-top: 6%;
+
+.CurrentLocation {
+  background-color: var(--main-color);
+  font-size: large;
 }
 
 @media only screen and (max-width: 600px) {
   .Hamburger {
-    display: block;
     height: 32px;
     width: 32px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 15px;
+    z-index: 2;
+    background-color: transparent;
+    padding-left: 5px;
   }
   .Hamburger .Line {
     display: block;
     height: 4px;
     width: 100%;
     border-radius: 10px;
-    background: whitesmoke;
-    transition: all 0.3s ease-in-out;
+    background: white;
+    transition: all 0.2s ease-in-out;
+    z-index: 2;
   }
   .Hamburger.active .Line:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 12px);
+    transform: rotate(45deg) translate(8px, 12px) scale(1.41);
   }
 
   .Hamburger.active .Line:nth-child(2) {
@@ -77,23 +85,35 @@ li a:hover:not(.active) {
   }
 
   .Hamburger.active .Line:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -12px);
+    transform: rotate(-45deg) translate(8px, -12px) scale(1.41);
   }
 
   ul {
     flex-direction: column;
+    height: 100%;
+    width: 100%;
   }
   .Menu {
     display: none;
   }
   .Menu.open {
     display: block;
-    top: 6.5%;
+    width: 100%;
+    z-index: 0;
   }
   .HamburgerContainer {
     display: block;
+    background-color: transparent;
+    z-index: 2;
+    height: 32px;
+    width: 32px;
   }
   li {
-    border-bottom: solid 1px px var(--main-color);
+    width: 100%;
+  }
+
+  li a, li h1 {
+    width: 100%;
+    border-radius: 0;
   }
 }
