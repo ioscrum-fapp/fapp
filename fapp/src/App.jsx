@@ -24,6 +24,7 @@ function App() {
             <Route path="/accounts/add" element={<CreateAccount />} />
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/expenses/:id" element={<Expense />} />
+            <Route path="/expenses/:id/edit" element={<CreateExpense />} />
             <Route path="/expenses/add" element={<CreateExpense />} />
             <Route path="/planned" element={<PlannedExpenses />} />
             <Route path="*" element={<NoPage />} />

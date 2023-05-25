@@ -18,6 +18,10 @@ export default function Expense() {
     navigate("/expenses");
   };
 
+  const handleClickEdit = async () => {
+    navigate(`/expenses/${id}/edit`);
+  };
+
   return (
     <>
       {json && (
@@ -38,11 +42,12 @@ export default function Expense() {
         )}
         {json && <h2>Date: {json.date}</h2>}
         {json && <p>Tags: {json.tags.join(", ")}</p>}
-        {json && (
-          <button className="Button" type="button" onClick={handleClick}>
+        <button className="Button" type="button" onClick={handleClickEdit}>
+            Edit
+        </button>
+        <button className="Button" type="button" onClick={handleClick}>
             Remove
-          </button>
-        )}
+        </button>
       </div>
     </>
   );
