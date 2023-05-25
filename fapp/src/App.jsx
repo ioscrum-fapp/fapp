@@ -7,7 +7,7 @@ import CreateExpense from "./pages/CreateExpense/CreateExpense.jsx";
 import Expense from "./pages/Expense/Expense.jsx";
 import Expenses from "./pages/Expenses/Expenses.jsx";
 import Home from "./pages/Home";
-import Layout from "./pages/Layout";
+import Layout from "./pages/Layout/Layout.jsx";
 import NoPage from "./pages/NoPage/NoPage.jsx";
 import PlannedExpenses from "./pages/PlannedExpenses/PlannedExpenses";
 import "./styles/App.css";
