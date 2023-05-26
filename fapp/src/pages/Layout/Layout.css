@@ -14,14 +14,26 @@ li a, li h1{
   text-align: center;
   padding: 14px 0;
   text-decoration: none;
+  width: calc(25vw - 31.5px);
   margin: 0;
-  width: 25vw;
   border-radius: 10px 10px 0 0;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
   transition: all 0.2s ease-in-out;
 }
 
+li img {
+  height: 40px;
+  width: 100px;
+  margin: 5px;
+}
+
 li a:hover:not(.active) {
-  background-color: var(--main-color);
+  background-color: var(--main-dark-accent);
+  border-top: 2px solid var(--main-color);
+  border-left: 2px solid var(--main-color);
+  border-right: 2px solid var(--main-color);
   transition: all 0.2s ease-in-out;
 }
 .HamburgerContainer {
@@ -52,8 +64,19 @@ li a:hover:not(.active) {
 }
 
 .CurrentLocation {
-  background-color: var(--main-color);
+  background-color: var(--main-dark-accent);
   font-size: large;
+  border-top: 2px solid var(--main-color);
+  border-left: 2px solid var(--main-color);
+  border-right: 2px solid var(--main-color);
+}
+
+.logoOnBigScreen {
+  display: block;
+}
+
+.logoOnMobile {
+  display: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,5 +138,17 @@ li a:hover:not(.active) {
   li a, li h1 {
     width: 100%;
     border-radius: 0;
+  }
+
+  .logoOnBigScreen {
+    display: none;
+  }
+
+  .logoOnMobile {
+    display: block;
+    height: 50px;
+    position: fixed;
+    top: 7px;
+    left: 55px
   }
 }
