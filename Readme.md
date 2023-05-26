@@ -1,6 +1,7 @@
-# This is Finance app
+# Welcome to FAPP
+### "Fapping saves you time and money!"
 
-## Running app
+## Running Fapp
 
 ### `npm install`
 

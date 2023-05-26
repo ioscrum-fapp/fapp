@@ -1,11 +1,7 @@
 import { React, useState } from "react";
 import {Link, Outlet, useLocation} from "react-router-dom";
 import "./Layout.css";
-/*
-<li>
-  <img src={Logo} alt="logo" />
-</li>
-*/
+import Logo from "../../assets/Icon2.svg"
 
 export default function Layout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +13,7 @@ export default function Layout() {
   };
   return (
     <div className="NavMenu">
+        <img src={Logo} alt="logo" className="logoOnMobile"/>
       <div className="HamburgerContainer">
         <div className={`Hamburger ${isOpen ? "active" : ""}`} onClick={toggle}>
           <span className="Line"></span>
@@ -26,6 +23,8 @@ export default function Layout() {
       </div>
       <nav className={`Menu ${isOpen ? "open" : ""}`}>
         <ul>
+          <li>
+                <img src={Logo} alt="logo" className="logoOnBigScreen"/></li>
           <li>{location !== ""
               ? <Link to="/">Home</Link>
               : <h1 className="CurrentLocation">Home</h1> }</li>
