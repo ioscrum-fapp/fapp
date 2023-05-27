@@ -146,7 +146,7 @@ export default function CreateExpense() {
               isDragging ? (
                 <div className="imageContainer">
                   <h3>Your attached file</h3>
-                  <img src={image} alt="error file not readable"/>
+                  <img src={image} alt="error file not readable" className="dragImage"/>
                   <button type='button' className="cancelButton" onClick={handleCancel}>Cancel</button>
                 </div>
               ) : (
