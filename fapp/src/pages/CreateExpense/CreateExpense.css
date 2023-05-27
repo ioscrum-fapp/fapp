@@ -13,10 +13,31 @@
   text-align: center;
   margin-bottom: 20px;
 }
-
 .formControl label {
   display: block;
   font-size: 25px;
+}
+img{
+  max-height: 40vh;
+  max-width: 25vw;
+  display: block;
+  margin: 5vh auto;
+}
+.cancelButton{
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 5vh;
+  border-radius: 15px;
+  background-color: rgba(255, 0, 0, 0.684);
+  border: solid 5px black;
+  font-size: 25px;
+}
+.imageContainer{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 input,
 select {
@@ -42,10 +63,23 @@ select {
   border: solid 5px var(--main-color);
   border-radius: 5px;
 }
+.dropzone{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  height: 30vh;
+  padding: 1vh;
+  border: 5px dashed rgb(117, 112, 112);
+  margin: 2vh;
+}
 @media only screen and (min-width: 600px) {
   input,
   select,
   .submitButton {
+    width: 55%;
+  }
+  .cancelButton{
     width: 55%;
   }
 }

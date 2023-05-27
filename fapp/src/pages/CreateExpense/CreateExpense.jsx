@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate, Link, useParams} from "react-router-dom";
-import {CreateNewExpense, EditExpense} from "../../backend/expenseLogic";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { DateTimeToJsFormat } from "../../backend/dateTimeLogic";
+import { CreateNewExpense, EditExpense } from "../../backend/expenseLogic";
 import useFetch from "../../hooks/useFetch";
 import "./CreateExpense.css";
-import {DateTimeToJsFormat} from "../../backend/dateTimeLogic.jsx";
 
 const userId = 1;
 const url = "http://localhost:3030/accounts?user_id=";
@@ -13,7 +13,14 @@ export default function CreateExpense() {
   const [value, setValue] = useState(undefined);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
+  const [file,setFile] = useState(null);
+  /*
+  to show client the file he uploaded
+  */
+  const [image,setImage] = useState(null);
+  const [isDragging,setIsDragging] = useState(false);
   const navigate = useNavigate();
+  
 
   const accountUrl = url + userId;
   const {
@@ -29,14 +36,48 @@ export default function CreateExpense() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //tags are temporary an empty list TODO change that
+    // tags are temporary an empty list TODO change that
 
     if (id)
       EditExpense(navigate, userId, value, date, [], selectedAccount, id);
     else
       CreateNewExpense(navigate, userId, value, date, [], selectedAccount);
   };
+ 
+  const loadImage = (imageToLoad) => {
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(imageToLoad);
+  }
+  const handleDrag = (event) => {
+    event.preventDefault();
+  };
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const acceptedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    if(acceptedFileTypes.includes(event.dataTransfer.files[0].type))
+    {
+      setFile(event.dataTransfer.files[0]);
+      setIsDragging(true);
+      loadImage(event.dataTransfer.files[0]);
+    }
+    else
+      alert("The type of file is not acceptable");
+  }
+  const handleCancel = () =>{
+    setFile(null);
+    setImage(null);
+    setIsDragging(false);
+  }
+  const handleInput = (event)=>{
+    setFile(event.target.files[0])
+    setIsDragging(true);
+    loadImage(event.target.files[0]);
+  }
+  
   useEffect(() => {
     [accountsJson];
     if (accountsJson && !selectedAccount) {
@@ -96,6 +137,29 @@ export default function CreateExpense() {
                 ))}
               </select>
             </div>
+            {
+              /*
+              it has to have a drag and drop otherwise it does not work
+              */
+            }
+            {
+              isDragging ? (
+                <div className="imageContainer">
+                  <h3>Your attached file</h3>
+                  <img src={image} alt="error file not readable"/>
+                  <button type='button' className="cancelButton" onClick={handleCancel}>Cancel</button>
+                </div>
+              ) : (
+                <div className="dropzone" onDragOver={handleDrag} onDrop={handleDrop}>
+                  <h2>Drag file here only JPEG, JPG and PNG are allowed</h2>
+                  <h3>Or</h3>
+                  <input type="file" 
+                  onChange={handleInput}
+                  accept="image/png, image/jpeg, image/jpg"
+                  />
+                </div>
+              )
+            }
             <div className="formControl">
               <button type="submit" className="submitButton">
                 {id ? "Edit" : "Create"}
