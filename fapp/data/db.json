@@ -81,6 +81,14 @@
       "date": "2023-05-27T14:21:00.000Z",
       "tags": [],
       "accountId": 1
+    },
+    {
+      "id": "730afb9c-8566-4181-aff8-d13e813a9ac5",
+      "user_id": 1,
+      "value": "132.03",
+      "date": "2023-05-27T08:22:59.000Z",
+      "tags": [],
+      "accountId": "ae0ac308-b962-4a56-bf7d-9a1947965c1b"
     }
   ],
   "accounts": [
