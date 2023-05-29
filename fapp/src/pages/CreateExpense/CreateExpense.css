@@ -17,7 +17,7 @@
   display: block;
   font-size: 25px;
 }
-img{
+.dragImage{
   max-height: 40vh;
   max-width: 25vw;
   display: block;
