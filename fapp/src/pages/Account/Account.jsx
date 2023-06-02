@@ -17,6 +17,10 @@ export default function Account() {
     navigate("/accounts/");
   };
 
+    const handleClickEdit = async () => {
+        navigate(`/accounts/${id}/edit`);
+    };
+
   return (
     <>
       <Link to="/accounts/">
@@ -33,11 +37,12 @@ export default function Account() {
             Balance: {currency} {json.balance}
           </p>
         )}
-        {json && (
+          <button type="button" className="Button" onClick={handleClickEdit}>
+              Edit
+          </button>
           <button type="button" className="Button" onClick={handleClick}>
             Remove
           </button>
-        )}
       </div>
     </>
   );

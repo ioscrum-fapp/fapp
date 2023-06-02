@@ -21,6 +21,23 @@ export async function CreateNewAccount(navigate, userId, name, balance) {
   });
 }
 
+export async function EditAccount(navigate, userId, name, balance, accountId) {
+  const account = {
+    id: accountId,
+    user_id: userId,
+    name,
+    balance,
+  };
+
+  fetch(BACKEND_URL + accountId, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(account),
+  }).then(() => {
+    navigate(accountsRoute + accountId);
+  });
+}
+
 export async function DeleteAccount(accountId) {
   return fetch(BACKEND_URL + accountId, {
     method: "DELETE",

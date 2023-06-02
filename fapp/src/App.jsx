@@ -21,6 +21,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/accounts/:id" element={<Account />} />
+            <Route path="/accounts/:id/edit" element={<CreateAccount />} />
             <Route path="/accounts/add" element={<CreateAccount />} />
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/expenses/:id" element={<Expense />} />
