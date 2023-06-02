@@ -95,13 +95,12 @@ export default function CreateExpense() {
   });
 
   return (
-      <>
+      <div className="CreateExpense">
         <Link to={id ? `/expenses/${id}` : "/expenses"}>
           <button type="button" className="Button">
             Go back
           </button>
         </Link>
-        <div className="CreateExpense">
           <h1> {id ? "Edit expense" : "Add new expense"} </h1>
           <form onSubmit={handleSubmit} className="AddingForm">
             <div className="formControl">
@@ -166,7 +165,6 @@ export default function CreateExpense() {
               </button>
             </div>
           </form>
-        </div>
-      </>
+      </div>
   );
 }
