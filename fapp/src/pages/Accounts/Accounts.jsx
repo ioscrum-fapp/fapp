@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch.jsx";
-import AccountsList from "../AccountsList/AccountsList.jsx";
+import useFetch from "../../hooks/useFetch";
+import AccountsList from "../AccountsList/AccountsList";
 import "./Accounts.css";
 
 const url = "http://localhost:3030/accounts?user_id=";
-const user_id = 1;
+const userId = 1;
 
-const Accounts = () => {
-  const accounts_url = url + user_id;
-  const { json, isFinished, error } = useFetch(accounts_url);
+function Accounts() {
+  const accountsUrl = url + userId;
+  const { json, isFinished, error } = useFetch(accountsUrl);
 
   return (
     <div className="Accounts">
@@ -25,6 +25,6 @@ const Accounts = () => {
       {json && <AccountsList accounts={json} />}
     </div>
   );
-};
+}
 
 export default Accounts;

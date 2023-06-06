@@ -7,95 +7,15 @@
   ],
   "expenses": [
     {
-      "id": 1,
+      "id": "21e8c6a5-50a3-4f24-b96e-32955261be01",
       "user_id": 1,
-      "value": 1.23,
-      "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
-      "accountId": 1
-    },
-    {
-      "id": 2,
-      "user_id": 1,
-      "value": 1.23,
-      "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
-      "accountId": 1
-    },
-    {
-      "id": 3,
-      "user_id": 2,
-      "value": 1.23,
-      "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
-      "accountId": 1
-    },
-    {
-      "id": "c2dbd1df-d35e-4a1d-ad01-98f3084e1cff",
-      "user_id": 1,
-      "value": "444",
-      "date": "2023-05-27T14:21:00.000Z",
+      "value": "33.98",
+      "date": "2023-05-30T17:00:00.000Z",
       "tags": [],
-      "accountId": 1
-    },
-    {
-      "id": "8e7b5a45-1dc7-4c9d-9d69-f1e89ca2d292",
-      "user_id": 1,
-      "value": "777",
-      "date": "2023-05-27T14:21:00.000Z",
-      "tags": [],
-      "accountId": 1
-    },
-    {
-      "id": "c2cac35e-b08c-41ff-a36f-5f8d37629871",
-      "user_id": 1,
-      "value": "1",
-      "date": "2023-05-03T20:49:00.000Z",
-      "tags": [],
-      "accountId": "2"
-    },
-    {
-      "id": "5bef4d42-93ad-4808-b4df-622a20d34ab0",
-      "user_id": 1,
-      "value": "0.02",
-      "date": "2023-05-01T20:58:00.000Z",
-      "tags": [],
-      "accountId": "2"
-    },
-    {
-      "id": "6be8215e-7224-4f1c-af3a-f609abcbbab8",
-      "user_id": 1,
-      "value": "444",
-      "date": "2023-05-27T14:21:00.000Z",
-      "tags": [],
-      "accountId": 1
+      "accountId": "61c7e428-a7ab-4bee-a96a-aaf2d2c8ad3e"
     }
   ],
   "accounts": [
-    {
-      "id": 1,
-      "user_id": 1,
-      "name": "test account 2",
-      "balance": 1234
-    },
-    {
-      "id": 2,
-      "user_id": 1,
-      "name": "test account 2",
-      "balance": 1234
-    },
     {
       "id": 3,
       "user_id": 2,
@@ -103,10 +23,10 @@
       "balance": 1234
     },
     {
-      "id": "ae0ac308-b962-4a56-bf7d-9a1947965c1b",
+      "id": "61c7e428-a7ab-4bee-a96a-aaf2d2c8ad3e",
       "user_id": 1,
-      "name": "test 4",
-      "balance": "10.09"
+      "name": "b",
+      "balance": "124"
     }
   ],
   "cyclicExpenses": [
