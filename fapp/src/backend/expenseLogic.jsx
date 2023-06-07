@@ -1,68 +1,60 @@
-import moment from "moment";
-import { v4 as uuid } from "uuid";
-
-const expensesRoute = "/expenses/";
-const BACKEND_URL = "http://localhost:3030/expenses/";
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  setDoc,
+} from "@firebase/firestore";
+import { db } from "./firebase";
 
 export const EXPENSES_COLLECTION = "expenses";
 
-export function CreateNewExpense(
-  navigate,
+export async function CreateNewExpense(
   userId,
   value,
   date,
   tags,
-  accountId
+  accountId,
+  isIncome
 ) {
-  const newUuid = uuid();
   const expense = {
-    id: newUuid,
-    user_id: userId,
-    value,
-    date: moment(date).toISOString(),
-    tags,
-    accountId,
-  };
-
-  fetch(BACKEND_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(expense),
-  }).then(() => {
-    navigate(expensesRoute + newUuid);
-  });
-}
-
-export function EditExpense(
-    navigate,
     userId,
     value,
-    date,
+    date: Timestamp.fromDate(new Date(date)),
     tags,
     accountId,
-    expenseId
-) {
-  const expense = {
-    id: expenseId,
-    user_id: userId,
-    value,
-    date: moment(date).toISOString(),
-    tags,
-    accountId,
+    isIncome,
   };
 
-  fetch(BACKEND_URL + expenseId, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(expense),
-  }).then(() => {
-    navigate(expensesRoute + expenseId);
-  });
+  const ref = await addDoc(collection(db, EXPENSES_COLLECTION), expense);
+
+  return ref.id;
+}
+
+export async function EditExpense(
+  userId,
+  value,
+  date,
+  tags,
+  accountId,
+  expenseId,
+  isIncome
+) {
+  const expense = {
+    userId,
+    value,
+    date: Timestamp.fromDate(new Date(date)),
+    tags,
+    accountId,
+    isIncome,
+  };
+
+  const ref = doc(db, EXPENSES_COLLECTION, expenseId);
+  await setDoc(ref, expense);
 }
 
 export async function DeleteExpense(expenseId) {
-  return fetch(BACKEND_URL + expenseId, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
+  const ref = doc(collection(db, EXPENSES_COLLECTION), expenseId);
+  await deleteDoc(ref);
 }

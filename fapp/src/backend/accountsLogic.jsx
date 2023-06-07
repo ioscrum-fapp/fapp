@@ -3,6 +3,8 @@ import { v4 as uuid } from "uuid";
 const accountsRoute = "/accounts/";
 const BACKEND_URL = "http://localhost:3030/accounts/";
 
+export const ACCOUNTS_COLLECTION = "accounts";
+
 export async function CreateNewAccount(navigate, userId, name, balance) {
   const newUuid = uuid();
   const account = {
