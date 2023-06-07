@@ -4,6 +4,8 @@ import { v4 as uuid } from "uuid";
 const expensesRoute = "/expenses/";
 const BACKEND_URL = "http://localhost:3030/expenses/";
 
+export const EXPENSES_COLLECTION = "expenses";
+
 export function CreateNewExpense(
   navigate,
   userId,
