@@ -17,34 +17,31 @@ import Providers from "./common/Providers";
 import SignUp from "./pages/SignUp/SignUp";
 import PrivateRoute from "./common/PrivateRoute";
 
-
-
-
 function App() {
   return (
-      <Providers>
-          <BrowserRouter>
-            <div className="App">
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  {/* <Route exact path="/accounts" element={<PrivateRoute element={<Accounts />} />} /> */}
-                  <Route path="/accounts" element={<Accounts />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signUp" element={<SignUp />} />
-                  <Route path="/accounts/:id" element={<Account />} />
-                  <Route path="/accounts/add" element={<CreateAccount />} />
-                  <Route path="/expenses" element={<Expenses />} />
-                  <Route path="/expenses/:id" element={<Expense />} />
-                  <Route path="/expenses/:id/edit" element={<CreateExpense />} />
-                  <Route path="/expenses/add" element={<CreateExpense />} />
-                  <Route path="/planned" element={<PlannedExpenses />} />
-                  <Route path="*" element={<NoPage />} />
-                </Route>
-              </Routes>
-            </div>
-          </BrowserRouter>
-      </Providers>
+    <Providers>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              {/* <Route exact path="/accounts" element={<PrivateRoute element={<Accounts />} />} /> */}
+              <Route path="/accounts" element={<Accounts />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/accounts/:id" element={<Account />} />
+              <Route path="/accounts/add" element={<CreateAccount />} />
+              <Route path="/expenses" element={<Expenses />} />
+              <Route path="/expenses/:id" element={<Expense />} />
+              <Route path="/expenses/:id/edit" element={<CreateExpense />} />
+              <Route path="/expenses/add" element={<CreateExpense />} />
+              <Route path="/planned" element={<PlannedExpenses />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Providers>
   );
 }
 
