@@ -51,7 +51,7 @@ export async function updateCyclicExpense(expenseId, expenseAttributes) {
   );
 }
 
-export async function deleteCyclucExpense(expenseId) {
+export async function deleteCyclicExpense(expenseId) {
   await deleteDoc(doc(db, CYCLIC_EXPENSES_COLLECTION, expenseId));
 }
 
