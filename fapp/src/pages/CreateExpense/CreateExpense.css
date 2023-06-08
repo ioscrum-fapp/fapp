@@ -17,12 +17,12 @@
   display: block;
   font-size: 25px;
 }
-.dragImage{
+.dragImage {
   border-radius: 10px;
   margin: 10px;
   display: block;
 }
-.cancelButton{
+.cancelButton {
   display: block;
   margin: 10px auto;
   width: 50%;
@@ -32,7 +32,7 @@
   border: solid 2px var(--cancel-color);
   font-size: 25px;
 }
-.imageContainer{
+.imageContainer {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -61,11 +61,11 @@ select {
   border: solid 2px var(--main-color);
   border-radius: 10px;
 }
-.dropzone{
+.dropzone {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   height: 30vh;
   padding: 1vh;
   border: 5px dashed rgb(117, 112, 112);
@@ -77,7 +77,7 @@ select {
   .submitButton {
     width: 55%;
   }
-  .cancelButton{
+  .cancelButton {
     width: 55%;
   }
 }

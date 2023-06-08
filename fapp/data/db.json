@@ -11,11 +11,7 @@
       "user_id": 1,
       "value": 1.23,
       "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
+      "tags": ["tag 1", "tag 2", "tag 3"],
       "accountId": 1
     },
     {
@@ -23,11 +19,7 @@
       "user_id": 1,
       "value": 1.23,
       "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
+      "tags": ["tag 1", "tag 2", "tag 3"],
       "accountId": 1
     },
     {
@@ -35,11 +27,7 @@
       "user_id": 2,
       "value": 1.23,
       "date": "2023-05-27T14:21:00.000Z",
-      "tags": [
-        "tag 1",
-        "tag 2",
-        "tag 3"
-      ],
+      "tags": ["tag 1", "tag 2", "tag 3"],
       "accountId": 1
     },
     {

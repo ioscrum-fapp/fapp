@@ -27,9 +27,8 @@ export default function CreateExpense() {
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
 
-  const [accounts,,] =
-    useCollection(ACCOUNTS_COLLECTION);
-  const [expense,,] = id
+  const [accounts, ,] = useCollection(ACCOUNTS_COLLECTION);
+  const [expense, ,] = id
     ? useDocument(EXPENSES_COLLECTION, id)
     : [undefined, true, undefined];
 
@@ -94,7 +93,7 @@ export default function CreateExpense() {
   const expenseJson = expense?.data();
   useEffect(() => {
     if (expenseJson && !value) {
-      const {seconds, nanoseconds} = expenseJson.date
+      const { seconds, nanoseconds } = expenseJson.date;
       setValue(expenseJson.value);
       setDate(DateTimeToJsFormat(new Timestamp(seconds, nanoseconds).toDate()));
       setSelectedAccount(expenseJson.accountId);

@@ -5,9 +5,8 @@ import useCollection from "../../hooks/useCollection";
 import "./Accounts.css";
 import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 
-
 export default function Accounts() {
-  const [ accounts, isFinished, error ] = useCollection(ACCOUNTS_COLLECTION);
+  const [accounts, isFinished, error] = useCollection(ACCOUNTS_COLLECTION);
 
   return (
     <div className="Accounts">
@@ -23,4 +22,4 @@ export default function Accounts() {
       {accounts && <AccountsList accounts={accounts.docs} />}
     </div>
   );
-};
+}

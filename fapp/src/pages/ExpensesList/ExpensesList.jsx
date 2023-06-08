@@ -9,7 +9,7 @@ const currency = "$";
 function CreateExpense(expense) {
   const { id } = expense;
   const { value, date, tags } = expense.data();
-  const timestamp = new  Timestamp(date.seconds, date.nanoseconds);
+  const timestamp = new Timestamp(date.seconds, date.nanoseconds);
   return (
     <div className="ExpenseList-element" key={id}>
       <Link className="DetailsLink" to={`/expenses/${id}`}>

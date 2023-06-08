@@ -8,7 +8,8 @@ ul {
   height: 50px;
 }
 
-li a, li h1{
+li a,
+li h1 {
   display: block;
   color: white;
   text-align: center;
@@ -135,7 +136,8 @@ li a:hover:not(.active) {
     width: 100%;
   }
 
-  li a, li h1 {
+  li a,
+  li h1 {
     width: 100%;
     border-radius: 0;
   }
@@ -149,6 +151,6 @@ li a:hover:not(.active) {
     height: 50px;
     position: fixed;
     top: 7px;
-    left: 55px
+    left: 55px;
   }
 }

@@ -7,7 +7,10 @@ import { EXPENSES_COLLECTION } from "../../backend/expenseLogic";
 import { orderBy } from "@firebase/firestore";
 
 export default function Expenses() {
-  const [expenses, isFinished, error] = useCollection(EXPENSES_COLLECTION, orderBy("date"));
+  const [expenses, isFinished, error] = useCollection(
+    EXPENSES_COLLECTION,
+    orderBy("date")
+  );
 
   return (
     <div className="Expenses">

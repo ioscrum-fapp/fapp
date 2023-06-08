@@ -22,8 +22,10 @@ export default function Expense() {
     navigate(`/expenses/${id}/edit`);
   };
 
-  const data = expense?.data()
-  const timestamp = data ? new Timestamp(data.date.seconds, data.date.nanoseconds) : undefined;
+  const data = expense?.data();
+  const timestamp = data
+    ? new Timestamp(data.date.seconds, data.date.nanoseconds)
+    : undefined;
 
   return (
     <>
@@ -43,13 +45,15 @@ export default function Expense() {
             {currency} {data.value}
           </h1>
         )}
-        {data && <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>}
+        {data && (
+          <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>
+        )}
         {data && <p>Tags: {data.tags.join(", ")}</p>}
         <button className="Button" type="button" onClick={handleClickEdit}>
-            Edit
+          Edit
         </button>
         <button className="Button" type="button" onClick={handleClick}>
-            Remove
+          Remove
         </button>
       </div>
     </>
