@@ -13,6 +13,7 @@ export default function useDocument(collectionName, id) {
       const q = doc(collection(db, collectionName), id);
       const fetchedDoc = await getDoc(q);
       setDocument(fetchedDoc);
+      setError(undefined);
     } catch (e) {
       setError(e);
     } finally {

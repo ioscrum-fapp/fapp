@@ -13,6 +13,7 @@ export default function useCollection(collectionName, ...queries) {
       const q = query(collection(db, collectionName), ...queries);
       const fetchedDocs = await getDocs(q);
       setDocs(fetchedDocs);
+      setError(undefined);
     } catch (e) {
       setError(e);
     } finally {
