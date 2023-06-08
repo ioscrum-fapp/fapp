@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CreateNewAccount } from "../../backend/accountsLogic";
 import "./CreateAccount.css";
+
 const userId = 1;
 
 export default function CreateAccount() {
@@ -11,7 +12,8 @@ export default function CreateAccount() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await CreateNewAccount(navigate, userId, name, balance);
+    const newId = await CreateNewAccount(userId, name, parseFloat(balance));
+    navigate(`/accounts/${newId}`);
   };
 
   return (
