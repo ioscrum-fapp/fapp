@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { DateTimeToJsFormat } from "../../backend/dateTimeLogic";
 import {
@@ -11,8 +11,7 @@ import useCollection from "../../hooks/useCollection";
 import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 import useDocument from "../../hooks/useDocument";
 import { Timestamp } from "@firebase/firestore";
-
-const userId = 1;
+import { AuthContext } from "../../common/Auth";
 
 export default function CreateExpense() {
   const { id } = useParams();
@@ -32,16 +31,26 @@ export default function CreateExpense() {
     ? useDocument(EXPENSES_COLLECTION, id)
     : [undefined, true, undefined];
 
+  const { currentUser } = useContext(AuthContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // tags are temporary an empty list TODO change that
 
     if (id) {
-      await EditExpense(userId, value, date, [], selectedAccount, id, false);
+      await EditExpense(
+        currentUser.uid,
+        value,
+        date,
+        [],
+        selectedAccount,
+        id,
+        false
+      );
       navigate(`/expenses/${id}`);
     } else {
       const newId = await CreateNewExpense(
-        userId,
+        currentUser.uid,
         value,
         date,
         [],

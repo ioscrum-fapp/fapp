@@ -1,16 +1,23 @@
-import { collection, getDocs, query } from "@firebase/firestore";
-import { useCallback, useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "@firebase/firestore";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { db } from "../backend/firebase";
+import { AuthContext } from "../common/Auth";
 
 export default function useCollection(collectionName, ...queries) {
   const [docs, setDocs] = useState();
   const [finished, setFinished] = useState(false);
   const [error, setError] = useState();
 
+  const { currentUser } = useContext(AuthContext);
+
   const fetch = useCallback(async () => {
     try {
       setFinished(false);
-      const q = query(collection(db, collectionName), ...queries);
+      const q = query(
+        collection(db, collectionName),
+        where("userId", "==", currentUser.uid),
+        ...queries
+      );
       const fetchedDocs = await getDocs(q);
       setDocs(fetchedDocs);
       setError(undefined);

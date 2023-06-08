@@ -1,4 +1,10 @@
-import { addDoc, collection, deleteDoc, doc, updateDoc } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "@firebase/firestore";
 import { db } from "./firebase";
 
 export const TAGS_COLLECTION = "tags";

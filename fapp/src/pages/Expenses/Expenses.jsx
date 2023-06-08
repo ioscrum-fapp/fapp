@@ -19,7 +19,7 @@ export default function Expenses() {
           Add Expense
         </button>
       </Link>
-      {error && <div>{String(error)}</div>}
+      {error && <div>{error.toString()}</div>}
       {!isFinished && <div>Downloading accounts...</div>}
       {expenses && <ExpensesList expenses={expenses} />}
     </div>

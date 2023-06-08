@@ -78,7 +78,7 @@ export default function PlannedExpenses() {
             </div>
           ))
         : "Loading..."}
-      {plannedExpensesError ?? cyclicExpensesError}
+      {plannedExpensesError?.toString() ?? cyclicExpensesError?.toString()}
     </div>
   );
 }
