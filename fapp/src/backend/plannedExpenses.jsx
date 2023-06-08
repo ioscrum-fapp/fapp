@@ -2,6 +2,7 @@ import moment from "moment";
 import { v4 as uuid } from "uuid";
 
 const BACKEND_URL = "http://localhost:3030/plannedExpenses/";
+export const PLANNED_EXPENSES_COLLECTION = "plannedExpenses"
 
 export async function createPlannedExpense(userId, value, date, isIncome) {
   const id = uuid();

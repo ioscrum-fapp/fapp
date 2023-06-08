@@ -1,39 +1,59 @@
 import React from "react";
 import moment from "moment";
-import useFetchJson from "../../hooks/useFetch";
 import {
+  CYCLIC_EXPENSES_COLLECTION,
   CYCLIC_PROMPTS,
   getClosestDateOfCyclicExpense,
 } from "../../backend/cyclicExpenses";
-
 import "./PlannedExpenses.css";
-
-const userId = 1;
-const plannedExpensesUrl = `http://localhost:3030/plannedExpenses?userId=${userId}`;
-const cyclicExpensesUrl = `http://localhost:3030/cyclicExpenses?userId=${userId}`;
+import { PLANNED_EXPENSES_COLLECTION } from "../../backend/plannedExpenses";
+import useCollection from "../../hooks/useCollection";
+import { Timestamp, where } from "@firebase/firestore";
 
 const currency = "$";
 
 export default function PlannedExpenses() {
-  const {
-    json: plannedExpenses,
-    isFinished: plannedExpensesFinished,
-    error: plannedExpensesError,
-  } = useFetchJson(plannedExpensesUrl);
-  const {
-    json: cyclicExpenses,
-    isFinished: cyclicExpensesFinished,
-    error: cyclicExpensesError,
-  } = useFetchJson(cyclicExpensesUrl);
+  const [plannedExpenses, plannedExpensesFinished, plannedExpensesError] =
+    useCollection(
+      PLANNED_EXPENSES_COLLECTION,
+      where("date", ">=", Timestamp.now())
+    );
+  const [cyclicExpenses, cyclicExpensesFinished, cyclicExpensesError] =
+    useCollection(CYCLIC_EXPENSES_COLLECTION);
 
-  const plannedExpensesFromNow = plannedExpenses
-    ?.map((e) => ({ ...e, date: moment(e.date) }))
-    .filter((e) => e.date.isSameOrAfter(moment(), "day"));
+  const plannedExpensesFromNow = plannedExpenses?.docs.map((e) => {
+    const { id } = e;
+    const data = e.data();
+    return {
+      ...data,
+      id,
+      date: moment(
+        new Timestamp(data.date.seconds, data.date.nanoseconds).toDate()
+      ),
+    };
+  });
 
-  const cyclicExpensesFromNow = cyclicExpenses?.map((e) => ({
-    ...e,
-    date: getClosestDateOfCyclicExpense(e, moment()),
-  }));
+  const cyclicExpensesFromNow = cyclicExpenses?.docs.map((e) => {
+    const { id } = e;
+    const data = e.data();
+    const res = {
+      ...data,
+      startDate: moment(
+        new Timestamp(
+          data.startDate.seconds,
+          data.startDate.nanoseconds
+        ).toDate()
+      ),
+      id,
+    };
+
+    const date = getClosestDateOfCyclicExpense(res, moment());
+
+    return {
+      ...res,
+      date,
+    };
+  });
 
   const allPlannedExpenses = (plannedExpensesFromNow ?? [])
     .concat(cyclicExpensesFromNow ?? [])

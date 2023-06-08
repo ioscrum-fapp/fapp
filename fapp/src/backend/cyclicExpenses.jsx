@@ -3,6 +3,8 @@ import { v4 as uuid } from "uuid";
 
 const BACKEND_URL = "http://localhost:3030/cyclicExpenses/";
 
+export const CYCLIC_EXPENSES_COLLECTION = "cyclicExpenses"
+
 export const CYCLIC_TYPE = Object.freeze({
   DAY: "day",
   WEEK: "week",
