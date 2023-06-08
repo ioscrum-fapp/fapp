@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CreateNewAccount } from "../../backend/accountsLogic";
 import "./CreateAccount.css";
+
 const userId = 1;
 
 export default function CreateAccount() {
