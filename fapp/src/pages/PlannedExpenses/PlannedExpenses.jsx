@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { Timestamp, where } from "@firebase/firestore";
 import {
   CYCLIC_EXPENSES_COLLECTION,
   CYCLIC_PROMPTS,
@@ -8,7 +9,6 @@ import {
 import "./PlannedExpenses.css";
 import { PLANNED_EXPENSES_COLLECTION } from "../../backend/plannedExpenses";
 import useCollection from "../../hooks/useCollection";
-import { Timestamp, where } from "@firebase/firestore";
 
 const currency = "$";
 
@@ -16,7 +16,11 @@ export default function PlannedExpenses() {
   const [plannedExpenses, plannedExpensesFinished, plannedExpensesError] =
     useCollection(
       PLANNED_EXPENSES_COLLECTION,
-      where("date", ">=", Timestamp.now())
+      where(
+        "date",
+        ">=",
+        Timestamp.fromMillis(moment().startOf("day").valueOf())
+      )
     );
   const [cyclicExpenses, cyclicExpensesFinished, cyclicExpensesError] =
     useCollection(CYCLIC_EXPENSES_COLLECTION);
