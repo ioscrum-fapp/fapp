@@ -1,7 +1,16 @@
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "@firebase/firestore";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
+import { db } from "./firebase";
 
-const BACKEND_URL = "http://localhost:3030/cyclicExpenses/";
+export const CYCLIC_EXPENSES_COLLECTION = "cyclicExpenses";
 
 export const CYCLIC_TYPE = Object.freeze({
   DAY: "day",
@@ -22,31 +31,28 @@ export async function createCyclicExpense(
   cyclicType,
   isIncome
 ) {
-  const id = uuid();
   const expense = {
-    id,
     userId,
     value,
-    startDate: moment(startDate).toISOString(),
+    startDate: Timestamp.fromDate(new Date(startDate)),
     type: cyclicType,
     isIncome,
   };
 
-  await fetch(BACKEND_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(expense),
-  });
+  const ref = await addDoc(collection(db, CYCLIC_EXPENSES_COLLECTION), expense);
 
-  return id;
+  return ref.id;
 }
 
 export async function updateCyclicExpense(expenseId, expenseAttributes) {
-  return fetch(BACKEND_URL + expenseId, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(expenseAttributes),
-  });
+  await updateDoc(
+    doc(db, CYCLIC_EXPENSES_COLLECTION, expenseId),
+    expenseAttributes
+  );
+}
+
+export async function deleteCyclicExpense(expenseId) {
+  await deleteDoc(doc(db, CYCLIC_EXPENSES_COLLECTION, expenseId));
 }
 
 export function getClosestDateOfCyclicExpense(expense, dateFrom) {

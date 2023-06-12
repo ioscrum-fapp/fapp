@@ -1,31 +1,37 @@
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "@firebase/firestore";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
+import { db } from "./firebase";
 
-const BACKEND_URL = "http://localhost:3030/plannedExpenses/";
+export const PLANNED_EXPENSES_COLLECTION = "plannedExpenses";
 
 export async function createPlannedExpense(userId, value, date, isIncome) {
-  const id = uuid();
   const expense = {
-    id,
     userId,
     value,
-    date: moment(date).toISOString(),
+    date: Timestamp.fromDate(new Date(date)),
     isIncome,
   };
 
-  await fetch(BACKEND_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(expense),
-  });
+  const ref = await addDoc(
+    collection(db, PLANNED_EXPENSES_COLLECTION),
+    expense
+  );
 
-  return id;
+  return ref.id;
 }
 
 export async function updatePlannedExpense(id, attributes) {
-  return fetch(BACKEND_URL + id, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(attributes),
-  });
+  await updateDoc(doc(db, PLANNED_EXPENSES_COLLECTION, id), attributes);
+}
+
+export async function deletePlannedExpense(expenseId) {
+  await deleteDoc(doc(db, PLANNED_EXPENSES_COLLECTION, expenseId));
 }

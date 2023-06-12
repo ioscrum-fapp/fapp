@@ -1,15 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import AccountsList from "../AccountsList/AccountsList";
+import useCollection from "../../hooks/useCollection";
 import "./Accounts.css";
+import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 
-const url = "http://localhost:3030/accounts?user_id=";
-const userId = 1;
-
-function Accounts() {
-  const accountsUrl = url + userId;
-  const { json, isFinished, error } = useFetch(accountsUrl);
+export default function Accounts() {
+  const [accounts, isFinished, error] = useCollection(ACCOUNTS_COLLECTION);
 
   return (
     <div className="Accounts">
@@ -22,9 +19,7 @@ function Accounts() {
       </div>
       {error && <div>{error}</div>}
       {!isFinished && <div>Downloading accounts...</div>}
-      {json && <AccountsList accounts={json} />}
+      {accounts && <AccountsList accounts={accounts.docs} />}
     </div>
   );
 }
-
-export default Accounts;

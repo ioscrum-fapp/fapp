@@ -1,15 +1,16 @@
 import React from "react";
 import "./Expenses.css";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import ExpensesList from "../ExpensesList/ExpensesList";
-
-const BACKEND_URL = "http://localhost:3030/expenses?user_id=";
-const userId = 1;
+import useCollection from "../../hooks/useCollection";
+import { EXPENSES_COLLECTION } from "../../backend/expenseLogic";
+import { orderBy } from "@firebase/firestore";
 
 export default function Expenses() {
-  const expenseUrl = BACKEND_URL + userId;
-  const { json, isFinished, error } = useFetch(expenseUrl);
+  const [expenses, isFinished, error] = useCollection(
+    EXPENSES_COLLECTION,
+    orderBy("date")
+  );
 
   return (
     <div className="Expenses">
@@ -18,9 +19,9 @@ export default function Expenses() {
           Add Expense
         </button>
       </Link>
-      {error && <div>{error}</div>}
+      {error && <div>{error.toString()}</div>}
       {!isFinished && <div>Downloading accounts...</div>}
-      {json && <ExpensesList expenses={json} />}
+      {expenses && <ExpensesList expenses={expenses} />}
     </div>
   );
 }

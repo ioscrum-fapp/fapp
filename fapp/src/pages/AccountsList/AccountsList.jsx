@@ -5,27 +5,27 @@ import "./AccountsList.css";
 const currency = "$";
 
 function CreateAccount(account) {
+  const { id } = account;
+  const { name, balance } = account.data();
   return (
-    <div className="AccountsList-element" key={account.id}>
-      <Link className="AccountdetailsLink" to={`/accounts/` + account.id}>
+    <div className="AccountsList-element" key={id}>
+      <Link className="AccountdetailsLink" to={`/accounts/${id}`}>
         <button type="button" className="DetailsButton">
           Details
         </button>
       </Link>
-      <h1>Account: {account.name}</h1>
+      <h1>Account: {name}</h1>
       <p>
-        Balance: {currency} {account.balance}
+        Balance: {currency} {balance}
       </p>
     </div>
   );
 }
 
-const AccountsList = ({ accounts }) => {
+export default function AccountsList({ accounts }) {
   return (
     <div className="AccountsList">
       {accounts && accounts.map(CreateAccount)}
     </div>
   );
-};
-
-export default AccountsList;
+}

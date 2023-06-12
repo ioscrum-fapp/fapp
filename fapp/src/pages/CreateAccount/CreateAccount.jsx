@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CreateNewAccount } from "../../backend/accountsLogic";
 import "./CreateAccount.css";
-
-const userId = 1;
+import { AuthContext } from "../../common/Auth";
 
 export default function CreateAccount() {
   const [name, setName] = useState("");
   const [balance, setBalance] = useState("");
   const navigate = useNavigate();
 
+  const { currentUser } = useContext(AuthContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await CreateNewAccount(navigate, userId, name, balance);
+    const newId = await CreateNewAccount(
+      currentUser.uid,
+      name,
+      parseFloat(balance)
+    );
+    navigate(`/accounts/${newId}`);
   };
 
   return (

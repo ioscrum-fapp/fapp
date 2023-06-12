@@ -1,18 +1,17 @@
 import React from "react";
 import "./Expense.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import { DeleteExpense } from "../../backend/expenseLogic";
+import { DeleteExpense, EXPENSES_COLLECTION } from "../../backend/expenseLogic";
 import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
+import useDocument from "../../hooks/useDocument";
+import { Timestamp } from "@firebase/firestore";
 
 const currency = "$";
-const url = "http://localhost:3030/expenses/";
 
 export default function Expense() {
   const { id } = useParams();
-  const expenseUrl = url + id;
-  const { json, isFinished, error } = useFetch(expenseUrl);
   const navigate = useNavigate();
+  const [expense, isFinished, error] = useDocument(EXPENSES_COLLECTION, id);
 
   const handleClick = async () => {
     await DeleteExpense(id);
@@ -23,9 +22,14 @@ export default function Expense() {
     navigate(`/expenses/${id}/edit`);
   };
 
+  const data = expense?.data();
+  const timestamp = data
+    ? new Timestamp(data.date.seconds, data.date.nanoseconds)
+    : undefined;
+
   return (
     <>
-      {json && (
+      {data && (
         <Link to="/expenses/">
           <button type="button" className="Button">
             Go back
@@ -36,18 +40,20 @@ export default function Expense() {
         {error && <div>{error}</div>}
         {!isFinished && <div>Downloading account...</div>}
 
-        {json && (
+        {data && (
           <h1>
-            {currency} {json.value}
+            {currency} {data.value}
           </h1>
         )}
-        {json && <h2>{DateTimeToHumanReadableFormatDateTime(new Date(json.date))}</h2>}
-        {json && <p>Tags: {json.tags.join(", ")}</p>}
+        {data && (
+          <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>
+        )}
+        {data && <p>Tags: {data.tags.join(", ")}</p>}
         <button className="Button" type="button" onClick={handleClickEdit}>
-            Edit
+          Edit
         </button>
         <button className="Button" type="button" onClick={handleClick}>
-            Remove
+          Remove
         </button>
       </div>
     </>

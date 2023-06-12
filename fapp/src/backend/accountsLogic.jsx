@@ -1,29 +1,19 @@
-import { v4 as uuid } from "uuid";
+import { addDoc, collection, deleteDoc, doc } from "@firebase/firestore";
+import { db } from "./firebase";
 
-const accountsRoute = "/accounts/";
-const BACKEND_URL = "http://localhost:3030/accounts/";
+export const ACCOUNTS_COLLECTION = "accounts";
 
-export async function CreateNewAccount(navigate, userId, name, balance) {
-  const newUuid = uuid();
+export async function CreateNewAccount(userId, name, balance) {
   const account = {
-    id: newUuid,
-    user_id: userId,
+    userId,
     name,
     balance,
   };
 
-  fetch(BACKEND_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(account),
-  }).then(() => {
-    navigate(accountsRoute + newUuid);
-  });
+  const ref = await addDoc(collection(db, ACCOUNTS_COLLECTION), account);
+  return ref.id;
 }
 
 export async function DeleteAccount(accountId) {
-  return fetch(BACKEND_URL + accountId, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
+  await deleteDoc(doc(db, ACCOUNTS_COLLECTION, accountId));
 }

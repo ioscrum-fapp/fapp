@@ -25,23 +25,16 @@
 // export default PrivateRoute
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import {AuthContext} from "./Auth";
+import { AuthContext } from "./Auth";
 
 function PrivateRoute({ children }) {
-    const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-    return (
-        <React.Fragment>
-            {
-                currentUser ? (
-                    children
-                ) : (
-                    <Navigate to="/login" />
-                )
-            }
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      {currentUser ? children : <Navigate to="/login" />}
+    </React.Fragment>
+  );
 }
 
 export default PrivateRoute;
-

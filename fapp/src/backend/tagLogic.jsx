@@ -1,59 +1,36 @@
-import { v4 as uuid } from "uuid";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "@firebase/firestore";
+import { db } from "./firebase";
 
-const tagRoute = "/tags/"
-const BACKEND_URL = "http://localhost:3030/tags/"
+export const TAGS_COLLECTION = "tags";
 
-export const CreateNewTag = async(
-    navigate,
+export const CreateNewTag = async (userId, description, tagColor) => {
+  const newTag = {
     userId,
-    tag,
-    color
-    ) => {
-        const newUuid = uuid();
-        const newTag = {
-            id: newUuid,
-            user_id: userId,
-            description: tag,
-            tag_color: color
-        };
-    
-        fetch(BACKEND_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newTag),
-          }).then(() => {
-            navigate(tagRoute + newUuid);
-          });
-}
+    description,
+    tagColor,
+  };
 
-export const editTag = async(
-    navigate,
-    tagId,
+  const ref = await addDoc(collection(db, TAGS_COLLECTION), newTag);
+
+  return ref.id;
+};
+
+export const editTag = async (tagId, userId, description, tagColor) => {
+  const editedTag = {
     userId,
-    tag,
-    color
-    ) => {
-        const editedTag = {
-            id: tagId,
-            user_id: userId,
-            description: tag,
-            tag_color: color
-        }
+    description,
+    tagColor,
+  };
 
-        fetch(BACKEND_URL + tagId, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(editedTag),
-        }).then(() => {
-            navigate(tagRoute + tagId);
-        });
+  await updateDoc(doc(db, TAGS_COLLECTION, tagId), editedTag);
+};
 
-}
-
-export const DeleteTag = async(tagId)=>{
-        fetch(BACKEND_URL + tagId, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-          });
-} 
-
+export const DeleteTag = async (tagId) => {
+  await deleteDoc(doc(db, TAGS_COLLECTION, tagId));
+};
