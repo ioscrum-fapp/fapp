@@ -19,11 +19,17 @@ export default function useDocument(collectionName, id) {
     } finally {
       setFinished(true);
     }
-  }, [collectionName, setFinished, setDocument, setError]);
+  }, [collectionName, setFinished, setDocument, setError, id]);
 
   useEffect(() => {
-    fetch();
-  }, [collectionName, fetch]);
+    if (id) {
+      fetch();
+    } else {
+      setDocument(undefined);
+      setError(undefined);
+      setFinished(true);
+    }
+  }, [collectionName, fetch, id]);
 
   return [document, finished, error];
 }

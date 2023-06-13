@@ -1,7 +1,7 @@
 import { Timestamp } from "@firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
+import Select from "react-select";
 import { DateTimeToJsFormat } from "../../backend/dateTimeLogic";
 import {
   CreateNewExpense,
@@ -12,6 +12,8 @@ import {
 
 import { AuthContext } from "../../common/Auth";
 import useCollection from "../../hooks/useCollection";
+import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
+import { TAGS_COLLECTION } from "../../backend/tagLogic";
 import useDocument from "../../hooks/useDocument";
 import "./CreateExpense.css";
 
@@ -20,6 +22,8 @@ export default function CreateExpense() {
   const [value, setValue] = useState(undefined);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
+  const [selectedTags, setSelectedTags] = useState([]);
+
   /*
   to show client the file he uploaded
   */
@@ -28,23 +32,21 @@ export default function CreateExpense() {
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
 
+  const [tags] = useCollection(TAGS_COLLECTION);
   const [accounts, ,] = useCollection(ACCOUNTS_COLLECTION);
-  const [expense, ,] = id
-    ? useDocument(EXPENSES_COLLECTION, id)
-    : [undefined, true, undefined];
+  const [expense, ,] = useDocument(EXPENSES_COLLECTION, id);
 
   const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // tags are temporary an empty list TODO change that
 
     if (id) {
       await EditExpense(
         currentUser.uid,
         value,
         date,
-        [],
+        selectedTags.map((elem) => elem.value),
         selectedAccount,
         id,
         false
@@ -55,7 +57,7 @@ export default function CreateExpense() {
         currentUser.uid,
         value,
         date,
-        [],
+        selectedTags.map((elem) => elem.value),
         selectedAccount,
         false
       );
@@ -108,6 +110,22 @@ export default function CreateExpense() {
       setSelectedAccount(accountsList[0].id);
     }
   }, [JSON.stringify(accountsList)]);
+
+  const tagList = tags?.docs;
+
+  useEffect(() => {
+    if (tagList && selectedTags.length !== 0) {
+      setSelectedTags([]);
+    }
+  }, [JSON.stringify(tagList)]);
+
+  let options;
+  if (tagList) {
+    options = tagList.map((tag) => ({
+      value: tag.id,
+      label: tag.data().description,
+    }));
+  }
 
   const expenseJson = expense?.data();
   useEffect(() => {
@@ -164,6 +182,30 @@ export default function CreateExpense() {
               ))}
             </select>
           </div>
+          <div className="formControl">
+            <label>Category:</label>
+
+            {tagList === null ? (
+              <div>Loading tags...</div>
+            ) : (
+              <Select
+                defaultValue={[]}
+                isMulti
+                options={options}
+                onChange={(item) => {
+                  setSelectedTags(item);
+                }}
+                className="select"
+                isClearable
+                isSearchable
+                isDisabled={false}
+                isLoading={false}
+                isRtl={false}
+                closeMenuOnSelect={false}
+              />
+            )}
+          </div>
+
           {/*
               it has to have a drag and drop otherwise it does not work
               */}
