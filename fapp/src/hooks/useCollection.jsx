@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "@firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { db } from "../backend/firebase";
 import { AuthContext } from "../common/Auth";
@@ -26,7 +26,14 @@ export default function useCollection(collectionName, ...queries) {
     } finally {
       setFinished(true);
     }
-  }, [collectionName, setFinished, setDocs, setError]);
+  }, [
+    collectionName,
+    setFinished,
+    setDocs,
+    setError,
+    JSON.stringify(queries),
+    currentUser.uid,
+  ]);
 
   useEffect(() => {
     fetch();
