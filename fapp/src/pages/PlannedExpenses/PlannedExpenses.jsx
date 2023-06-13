@@ -68,7 +68,7 @@ export default function PlannedExpenses() {
       {plannedExpensesFinished && cyclicExpensesFinished
         ? allPlannedExpenses.map((e) => (
             <div key={e.id} className="PlannedExpenseCard">
-              <div className="ExpenseValue">
+              <div className="ExpenseValue" style={{color: e.isIncome?"green":"red"}}>
                 {currency} {Number(e.value).toFixed(2)}
               </div>
               <div className="ExpenseDate">{e.date.format("YYYY-MM-DD")}</div>

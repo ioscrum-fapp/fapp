@@ -74,7 +74,7 @@ export default function Expense() {
         {!isFinished && <div>Downloading account...</div>}
 
         {data && (
-          <h1>
+           <h1 style={{color: data.isIncome?"green":"red"}}>
             {currency} {data.value}
           </h1>
         )}
