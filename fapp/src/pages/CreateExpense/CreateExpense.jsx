@@ -17,10 +17,11 @@ import { AuthContext } from "../../common/Auth";
 
 export default function CreateExpense() {
   const { id } = useParams();
-  const [value, setValue] = useState(undefined);
+  const [value, setValue] = useState(0);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [oldValue, setOldValue] = useState(0);
   const [file, setFile] = useState(null);
 
   /*
@@ -49,6 +50,7 @@ export default function CreateExpense() {
         id,
         false
       );
+      await Edit
       navigate(`/expenses/${id}`);
     } else {
       const newId = await CreateNewExpense(
@@ -151,7 +153,10 @@ export default function CreateExpense() {
               step="0.01"
               value={value}
               min="0"
-              onChange={(e) => parseFloat(setValue(e.target.value))}
+              onChange={(e) => {
+                setOldValue(value);
+                parseFloat(setValue(e.target.value));
+              }}
             />
           </div>
           <div className="formControl">
