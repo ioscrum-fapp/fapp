@@ -1,28 +1,30 @@
+import { Timestamp } from "@firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 import { DateTimeToJsFormat } from "../../backend/dateTimeLogic";
 import {
   CreateNewExpense,
   EXPENSES_COLLECTION,
   EditExpense,
+  saveFile
 } from "../../backend/expenseLogic";
-import "./CreateExpense.css";
-import useCollection from "../../hooks/useCollection";
-import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
-import useDocument from "../../hooks/useDocument";
-import { Timestamp } from "@firebase/firestore";
+
 import { AuthContext } from "../../common/Auth";
+import useCollection from "../../hooks/useCollection";
+import useDocument from "../../hooks/useDocument";
+import "./CreateExpense.css";
 
 export default function CreateExpense() {
   const { id } = useParams();
   const [value, setValue] = useState(undefined);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
-  const [file, setFile] = useState(null);
   /*
   to show client the file he uploaded
   */
   const [image, setImage] = useState(null);
+  const [file,setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
 
@@ -57,10 +59,14 @@ export default function CreateExpense() {
         selectedAccount,
         false
       );
+      try{
+        await saveFile(file,newId,currentUser.uid);
+      }catch{
+        alert("error in saving file to cloud");
+      }
       navigate(`/expenses/${newId}`);
     }
   };
-
   const loadImage = (imageToLoad) => {
     const reader = new FileReader();
 
@@ -69,29 +75,33 @@ export default function CreateExpense() {
     };
     reader.readAsDataURL(imageToLoad);
   };
+
   const handleDrag = (event) => {
     event.preventDefault();
   };
+ 
   const handleDrop = (event) => {
     event.preventDefault();
     const acceptedFileTypes = ["image/png", "image/jpeg", "image/jpg"];
     if (acceptedFileTypes.includes(event.dataTransfer.files[0].type)) {
-      setFile(event.dataTransfer.files[0]);
+      setFile(event.dataTransfer.files[0])
       setIsDragging(true);
       loadImage(event.dataTransfer.files[0]);
     } else alert("The type of file is not acceptable");
   };
+
   const handleCancel = () => {
-    setFile(null);
     setImage(null);
+    setFile(null)
     setIsDragging(false);
   };
+
   const handleInput = (event) => {
-    setFile(event.target.files[0]);
     setIsDragging(true);
+    setFile(event.target.files[0])
     loadImage(event.target.files[0]);
   };
-
+  
   const accountsList = accounts?.docs;
   useEffect(() => {
     if (accountsList && !selectedAccount) {
@@ -185,6 +195,7 @@ export default function CreateExpense() {
                 type="file"
                 onChange={handleInput}
                 accept="image/png, image/jpeg, image/jpg"
+                className="imageInput"
               />
             </div>
           )}

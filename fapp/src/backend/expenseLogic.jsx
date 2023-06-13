@@ -6,7 +6,7 @@ import {
   doc,
   setDoc,
 } from "@firebase/firestore";
-import { db } from "./firebase";
+import { db, fileStorage, ref, uploadBytes } from "./firebase";
 
 export const EXPENSES_COLLECTION = "expenses";
 
@@ -27,9 +27,9 @@ export async function CreateNewExpense(
     isIncome,
   };
 
-  const ref = await addDoc(collection(db, EXPENSES_COLLECTION), expense);
+  const newRef = await addDoc(collection(db, EXPENSES_COLLECTION), expense);
 
-  return ref.id;
+  return newRef.id;
 }
 
 export async function EditExpense(
@@ -50,11 +50,22 @@ export async function EditExpense(
     isIncome,
   };
 
-  const ref = doc(db, EXPENSES_COLLECTION, expenseId);
-  await setDoc(ref, expense);
+  const newRef = doc(db, EXPENSES_COLLECTION, expenseId);
+  await setDoc(newRef, expense);
 }
 
 export async function DeleteExpense(expenseId) {
-  const ref = doc(collection(db, EXPENSES_COLLECTION), expenseId);
-  await deleteDoc(ref);
+  const newRef = doc(collection(db, EXPENSES_COLLECTION), expenseId);
+  await deleteDoc(newRef);
 }
+export async function saveFile(fileToUpload,newId,uid){
+  try {
+    const storageRef = ref(
+      fileStorage,
+      `clients/${uid}/${newId}/${fileToUpload.name}`
+    );
+    await uploadBytes(storageRef, fileToUpload);
+  } catch (error) {
+    alert("Error uploading file:", error);
+  }
+};
