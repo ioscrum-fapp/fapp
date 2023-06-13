@@ -6,6 +6,7 @@ import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
 import useDocument from "../../hooks/useDocument";
 import { Timestamp } from "@firebase/firestore";
 import { TAGS_COLLECTION } from "../../backend/tagLogic";
+import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 
 const currency = "$";
 
@@ -39,6 +40,10 @@ export default function Expense() {
   };
 
   const data = expense?.data();
+
+  const [account, ,] = useDocument(ACCOUNTS_COLLECTION, data?.accountId);
+  const { name } = account?.data()??{};
+
   const timestamp = data
     ? new Timestamp(data.date.seconds, data.date.nanoseconds)
     : undefined;
@@ -60,6 +65,11 @@ export default function Expense() {
           <h1>
             {currency} {data.value}
           </h1>
+        )}
+        {name && (
+          <h4>
+            Account: {name}
+          </h4>
         )}
         {data && (
           <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>
