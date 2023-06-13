@@ -21,6 +21,8 @@
   border-radius: 10px;
   margin: 10px;
   display: block;
+  max-width: 50vw;
+  height: auto;
 }
 .cancelButton {
   display: block;
@@ -33,10 +35,10 @@
   font-size: 25px;
 }
 .imageContainer {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  max-width: 100%;
 }
 input,
 select {
@@ -64,20 +66,36 @@ select {
 .dropzone {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 30vh;
-  padding: 1vh;
-  border: 5px dashed rgb(117, 112, 112);
-  margin: 2vh;
+  border: none;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+.dropzone > h2,h3{
+  display: none;
+}
+.imageInput{
+  width: 90%;
 }
 @media only screen and (min-width: 600px) {
   input,
   select,
   .submitButton {
-    width: 55%;
+    width: 55vw;
   }
   .cancelButton {
-    width: 55%;
+    width: 55vw;
+  }
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30vh;
+    padding: 1vh;
+    border: 5px dashed rgb(117, 112, 112);
+    margin: 2vh;
+  }
+  .dropzone > h2,h3{
+    display: block;
   }
 }
