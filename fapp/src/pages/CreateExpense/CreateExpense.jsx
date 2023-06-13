@@ -1,5 +1,4 @@
 import { Timestamp } from "@firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
@@ -8,7 +7,9 @@ import {
   CreateNewExpense,
   EXPENSES_COLLECTION,
   EditExpense,
+  saveFile
 } from "../../backend/expenseLogic";
+
 import { AuthContext } from "../../common/Auth";
 import useCollection from "../../hooks/useCollection";
 import useDocument from "../../hooks/useDocument";
@@ -34,18 +35,6 @@ export default function CreateExpense() {
 
   const { currentUser } = useContext(AuthContext);
 
-  const saveFile = (fileToUpload,newId) =>{
-    const storage = getStorage();
-    const storageRef = ref(storage, `clients/${currentUser.uid}/${newId}/${fileToUpload.name}`) 
-    uploadBytes(storageRef, fileToUpload)
-    .then(() => {
-    })
-    .catch((error) => {
-      // Handle error
-      alert("Error uploading file:", error);
-    });
-  };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     // tags are temporary an empty list TODO change that
@@ -70,7 +59,11 @@ export default function CreateExpense() {
         selectedAccount,
         false
       );
-      saveFile(file,newId);
+      try{
+        await saveFile(file,newId,currentUser.uid);
+      }catch{
+        alert("error in saving file to cloud");
+      }
       navigate(`/expenses/${newId}`);
     }
   };
