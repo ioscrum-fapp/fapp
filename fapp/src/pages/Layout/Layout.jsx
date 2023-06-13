@@ -1,9 +1,9 @@
 import { React, useContext, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./Layout.css";
 import Logo from "../../assets/Icon2.svg";
-import { AuthContext } from "../../common/Auth";
 import { auth } from "../../backend/firebase";
+import { AuthContext } from "../../common/Auth";
+import "./Layout.css";
 
 export default function Layout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,9 +34,9 @@ export default function Layout() {
       <img src={Logo} alt="logo" className="logoOnMobile" />
       <div className="HamburgerContainer">
         <div className={`Hamburger ${isOpen ? "active" : ""}`} onClick={toggle}>
-          <span className="Line"></span>
-          <span className="Line"></span>
-          <span className="Line"></span>
+          <span className="Line" />
+          <span className="Line" />
+          <span className="Line" />
         </div>
       </div>
       <nav className={`Menu ${isOpen ? "open" : ""}`}>
@@ -82,7 +82,13 @@ export default function Layout() {
                   <h1 className="CurrentLocation">Categories</h1>
                 )}
               </li>
-
+              <li>
+                {location !== "charts" ? (
+                  <Link to="/charts">Charts</Link>
+                ) : (
+                  <h1 className="CurrentLocation">Charts</h1>
+                )}
+              </li>
               <li>
                 {" "}
                 <h1 className="CurrentLocation" onClick={() => logout()}>
