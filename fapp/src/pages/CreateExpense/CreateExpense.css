@@ -71,6 +71,16 @@ select {
   border: 5px dashed rgb(117, 112, 112);
   margin: 2vh;
 }
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  /* Add any other desired styles for the checkbox */
+}
+
 @media only screen and (min-width: 600px) {
   input,
   select,

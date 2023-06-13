@@ -14,6 +14,7 @@ import { TAGS_COLLECTION } from "../../backend/tagLogic";
 import useDocument from "../../hooks/useDocument";
 import { Timestamp } from "@firebase/firestore";
 import { AuthContext } from "../../common/Auth";
+import {createCyclicExpense, CYCLIC_TYPE, updateCyclicExpense} from "../../backend/cyclicExpenses";
 
 export default function CreateExpense() {
   const { id } = useParams();
@@ -36,30 +37,59 @@ export default function CreateExpense() {
 
   const { currentUser } = useContext(AuthContext);
 
+  const [isCyclic, setIsCyclic] = useState(false);
+
+  const cycleOptions = [
+      {name:"daily", value:CYCLIC_TYPE.DAY},
+      {name:"weekly", value:CYCLIC_TYPE.WEEK},
+      {name:"monthly", value:CYCLIC_TYPE.MONTH}
+  ]
+
+  const [selectedCycle, setSelectedCycle] = useState(cycleOptions[0].value);
+
+
+
+  const handleCheckboxChange = () => {
+    setIsCyclic(!isCyclic);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (id) {
-      await EditExpense(
-        currentUser.uid,
-        value,
-        date,
-        selectedTags.map((elem)=>elem.value),
-        selectedAccount,
-        id,
-        false
-      );
-      navigate(`/expenses/${id}`);
+
+        await EditExpense(
+            currentUser.uid,
+            value,
+            date,
+            selectedTags.map((elem)=>elem.value),
+            selectedAccount,
+            id,
+            false
+        )
+        navigate(`/expenses/${id}`);
     } else {
-      const newId = await CreateNewExpense(
-        currentUser.uid,
-        value,
-        date,
-        selectedTags.map((elem)=>elem.value),
-        selectedAccount,
-        false
-      );
-      navigate(`/expenses/${newId}`);
+      if(isCyclic){
+        const newId = await createCyclicExpense(
+            currentUser.uid,
+            value,
+            date,
+            selectedCycle,
+            false
+        )
+        navigate(`/planned`);
+      }else {
+        const newId = await CreateNewExpense(
+            currentUser.uid,
+            value,
+            date,
+            selectedTags.map((elem)=>elem.value),
+            selectedAccount,
+            false
+        );
+        navigate(`/expenses/${newId}`);
+      }
+
     }
   };
 
@@ -180,6 +210,38 @@ export default function CreateExpense() {
               ))}
             </select>
           </div>
+          {
+            !id && <div className="formControl">
+                <label className={isCyclic ? 'checkboxLabel checked' : 'checkboxLabel'}>
+                  Cyclic expense
+                  <input
+                      type="checkbox"
+                      checked={isCyclic}
+                      onChange={handleCheckboxChange}
+                  />
+                </label>
+              </div>
+          }
+
+          <div className="formControl">
+            {isCyclic && (
+                <>
+                  <label>Cycle:</label>
+                  <select
+                      value={selectedCycle}
+                      onChange={(e) => setSelectedCycle(e.target.value)}
+                  >
+                    {cycleOptions?.map((option) => (
+                        <option key={option.name} value={option.value}>
+                          {option.name}
+                        </option>
+                    ))}
+                  </select>
+                </>
+            )}
+          </div>
+
+
           <div className="formControl">
             <label>Category:</label>
 
