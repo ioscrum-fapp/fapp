@@ -21,7 +21,6 @@ export default function CreateExpense() {
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const [selectedTags, setSelectedTags] = useState([]);
-  const [oldValue, setOldValue] = useState(0);
   const [file, setFile] = useState(null);
 
   /*
@@ -50,7 +49,6 @@ export default function CreateExpense() {
         id,
         false
       );
-      await Edit
       navigate(`/expenses/${id}`);
     } else {
       const newId = await CreateNewExpense(
@@ -154,7 +152,6 @@ export default function CreateExpense() {
               value={value}
               min="0"
               onChange={(e) => {
-                setOldValue(value);
                 parseFloat(setValue(e.target.value));
               }}
             />

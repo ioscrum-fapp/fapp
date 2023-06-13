@@ -14,10 +14,6 @@ export async function CreateNewAccount(userId, name, balance) {
   return ref.id;
 }
 
-export async function EditAccountBalance(accountId, diff){
-  const
-}
-
 export async function DeleteAccount(accountId) {
   await deleteDoc(doc(db, ACCOUNTS_COLLECTION, accountId));
 }
