@@ -17,9 +17,9 @@ function CreateTag({ tagId }) {
   }
 
   return (
-      <p style={{ color: tag.data()?.tagColor }} key={tag.id}>
-        {tag.data()?.description}
-      </p>
+    <p style={{ color: tag.data()?.tagColor }} key={tag.id}>
+      {tag.data()?.description}
+    </p>
   );
 }
 
@@ -65,9 +65,7 @@ export default function Expense() {
           <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>
         )}
         <p> Categories:</p>
-        {tagIdList && tagIdList.map((tag) => (
-            <CreateTag tagId={tag} />
-        ))}
+        {tagIdList && tagIdList.map((tag) => <CreateTag tagId={tag} />)}
         <button className="Button" type="button" onClick={handleClickEdit}>
           Edit
         </button>

@@ -77,9 +77,9 @@ export default function Layout() {
 
               <li>
                 {location !== "tags" ? (
-                    <Link to="/tags">Categories</Link>
+                  <Link to="/tags">Categories</Link>
                 ) : (
-                    <h1 className="CurrentLocation">Categories</h1>
+                  <h1 className="CurrentLocation">Categories</h1>
                 )}
               </li>
 

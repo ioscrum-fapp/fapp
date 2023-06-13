@@ -44,7 +44,7 @@ export default function CreateExpense() {
         currentUser.uid,
         value,
         date,
-        selectedTags.map((elem)=>elem.value),
+        selectedTags.map((elem) => elem.value),
         selectedAccount,
         id,
         false
@@ -55,7 +55,7 @@ export default function CreateExpense() {
         currentUser.uid,
         value,
         date,
-        selectedTags.map((elem)=>elem.value),
+        selectedTags.map((elem) => elem.value),
         selectedAccount,
         false
       );
@@ -94,7 +94,6 @@ export default function CreateExpense() {
     loadImage(event.target.files[0]);
   };
 
-
   const accountsList = accounts?.docs;
   useEffect(() => {
     if (accountsList && !selectedAccount) {
@@ -107,7 +106,6 @@ export default function CreateExpense() {
   useEffect(() => {
     if (tagList && selectedTags.length !== 0) {
       setSelectedTags([]);
-
     }
   }, [JSON.stringify(tagList)]);
 
@@ -128,10 +126,6 @@ export default function CreateExpense() {
       setSelectedAccount(expenseJson.accountId);
     }
   }, [JSON.stringify(expenseJson)]);
-
-
-
-
 
   return (
     <>
@@ -182,24 +176,25 @@ export default function CreateExpense() {
             <label>Category:</label>
 
             {tagList === null ? (
-                <div>Loading tags...</div>
+              <div>Loading tags...</div>
             ) : (
-                <Select
-                    defaultValue={[]}
-                    isMulti
-                    options={options}
-                    onChange={(item) => {setSelectedTags(item)}}
-                    className="select"
-                    isClearable
-                    isSearchable
-                    isDisabled={false}
-                    isLoading={false}
-                    isRtl={false}
-                    closeMenuOnSelect={false}
-                />
+              <Select
+                defaultValue={[]}
+                isMulti
+                options={options}
+                onChange={(item) => {
+                  setSelectedTags(item);
+                }}
+                className="select"
+                isClearable
+                isSearchable
+                isDisabled={false}
+                isLoading={false}
+                isRtl={false}
+                closeMenuOnSelect={false}
+              />
             )}
           </div>
-
 
           {/*
               it has to have a drag and drop otherwise it does not work
