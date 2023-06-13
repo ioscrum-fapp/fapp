@@ -76,6 +76,16 @@ select {
 .imageInput{
   width: 90%;
 }
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  /* Add any other desired styles for the checkbox */
+}
+
 @media only screen and (min-width: 600px) {
   input,
   select,
