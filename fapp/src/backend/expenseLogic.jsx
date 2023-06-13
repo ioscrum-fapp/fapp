@@ -4,7 +4,10 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDocs,
+  query,
   setDoc,
+  where
 } from "@firebase/firestore";
 import { db, deleteObject, fileStorage, getDownloadURL, listAll, ref, uploadBytes } from "./firebase";
 
@@ -119,3 +122,15 @@ export async function deleteFile(uid,newId){
     alert("Error in deleting",error);
   }
 }
+export async function loadExpensesByUid (uid){
+  const q = query(collection(db, EXPENSES_COLLECTION), where('userId', '==', uid));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map((d) => d.data());
+    return data;
+  } catch (error) {
+    console.error('Error loading data:', error);
+    return null;
+  }
+};

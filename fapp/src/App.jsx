@@ -1,23 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Providers from "./common/Providers";
 import Account from "./pages/Account/Account";
 import Accounts from "./pages/Accounts/Accounts";
-import Tags from "./pages/Tags/Tags";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import CreateExpense from "./pages/CreateExpense/CreateExpense";
+import CreateTag from "./pages/CreateTag/CreateTag";
 import Expense from "./pages/Expense/Expense";
 import Expenses from "./pages/Expenses/Expenses";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout/Layout";
-import NoPage from "./pages/NoPage/NoPage";
 import Login from "./pages/Login/Login";
-import CreateTag from "./pages/CreateTag/CreateTag";
+import NoPage from "./pages/NoPage/NoPage";
+import PieChart from "./pages/PieChart/PieChart";
 import PlannedExpenses from "./pages/PlannedExpenses/PlannedExpenses";
-import "./styles/App.css";
-import Providers from "./common/Providers";
 import SignUp from "./pages/SignUp/SignUp";
-import PrivateRoute from "./common/PrivateRoute";
 import Tag from "./pages/Tag/Tag";
+import Tags from "./pages/Tags/Tags";
+import "./styles/App.css";
 
 function App() {
   return (
@@ -41,6 +41,7 @@ function App() {
               <Route path="/expenses/:id/edit" element={<CreateExpense />} />
               <Route path="/expenses/add" element={<CreateExpense />} />
               <Route path="/planned" element={<PlannedExpenses />} />
+              <Route path="/charts" element={<PieChart />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
