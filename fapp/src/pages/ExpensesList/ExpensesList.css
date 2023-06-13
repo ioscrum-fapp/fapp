@@ -17,5 +17,8 @@
   cursor: pointer;
 }
 
-.DetailsInfo {
+.TagContainer {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
 }
