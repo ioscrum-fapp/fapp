@@ -32,8 +32,6 @@ input {
   height: 5vh;
   padding: 0.3px 0.7px;
   font-size: 20px;
-  background-color: rgba(255, 255, 255, 0.445);
-  color: black;
   border-radius: 5px;
 }
 .submitButton {
