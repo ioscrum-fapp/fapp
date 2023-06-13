@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "./Expense.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { DeleteExpense, EXPENSES_COLLECTION } from "../../backend/expenseLogic";
-import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
-import useDocument from "../../hooks/useDocument";
 import { Timestamp } from "@firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
+import { DeleteExpense, EXPENSES_COLLECTION, deleteFile, loadFile } from "../../backend/expenseLogic";
 import { TAGS_COLLECTION } from "../../backend/tagLogic";
 import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
+import { AuthContext } from "../../common/Auth";
+import useDocument from "../../hooks/useDocument";
+import "./Expense.css";
 
 const currency = "$";
 
@@ -29,13 +30,17 @@ export default function Expense() {
   const navigate = useNavigate();
   const [expense, isFinished, error] = useDocument(EXPENSES_COLLECTION, id);
   const tagIdList = expense?.data()?.tags;
+  const { currentUser } = useContext(AuthContext);
+  const [image,setImage] = useState(null);
 
   const handleClick = async () => {
     await DeleteExpense(id);
+    await deleteFile(currentUser.uid,id);
     navigate("/expenses");
   };
 
   const handleClickEdit = async () => {
+    await loadFile(currentUser.uid,id);
     navigate(`/expenses/${id}/edit`);
   };
 
@@ -48,6 +53,13 @@ export default function Expense() {
     ? new Timestamp(data.date.seconds, data.date.nanoseconds)
     : undefined;
 
+    useEffect(() => {
+      const fetchImage = async () => {
+        const downloadURL = await loadFile(currentUser.uid, id);
+        setImage(downloadURL);
+      };
+      fetchImage();
+    }, []);
   return (
     <>
       {data && (
@@ -74,6 +86,11 @@ export default function Expense() {
         {data && (
           <h2>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h2>
         )}
+        {image && (
+        <div className="imageContainer">
+          <h3>Your image:</h3>
+          <img className="detailsImage" alt="noPhoto" src={image}/>
+        </div>)}
         <p> Categories:</p>
         {tagIdList && tagIdList.map((tag) => <CreateTag tagId={tag} />)}
         <button className="Button" type="button" onClick={handleClickEdit}>

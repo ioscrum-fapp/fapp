@@ -6,7 +6,7 @@ import {
   doc,
   setDoc,
 } from "@firebase/firestore";
-import { db, fileStorage, ref, uploadBytes } from "./firebase";
+import { db, deleteObject, fileStorage, getDownloadURL, listAll, ref, uploadBytes } from "./firebase";
 
 export const EXPENSES_COLLECTION = "expenses";
 
@@ -69,3 +69,53 @@ export async function saveFile(fileToUpload,newId,uid){
     alert("Error uploading file:", error);
   }
 };
+export async function loadFile(uid,newId){
+
+  const folder=ref(fileStorage,`clients/${uid}/${newId}`)
+  try{
+    const files= await listAll(folder);
+    if (files.items.length === 1) {
+      const fileRef = files.items[0];
+      const downloadURL = await getDownloadURL(fileRef);
+      return downloadURL;
+    }
+    return null;
+  } catch (error) {
+    return null
+  }
+}
+export async function replaceFile(fileToUpload,newId,uid,){
+  
+  try{
+    const folder=ref(fileStorage,`clients/${uid}/${newId}`)
+    
+    const files= await listAll(folder);
+    if(files.items.length === 1){
+      await deleteObject(files.items[0]);
+    }
+    const storageRef = ref(
+      fileStorage,
+      `clients/${uid}/${newId}/${fileToUpload.name}`
+    );
+   
+    await uploadBytes(storageRef, fileToUpload);
+  } catch (error) {
+    console.log(error);
+    alert('Error replacing file:', error);
+  }
+}
+export async function deleteFile(uid,newId){
+
+  const folder=ref(fileStorage,`clients/${uid}/${newId}`)
+  try{
+    const files= await listAll(folder);
+    if (files.items.length === 1) {
+      const fileRef = files.items[0];
+      await deleteObject(fileRef);
+    }
+    
+  } catch (error) {
+ 
+    alert("Error in deleting",error);
+  }
+}

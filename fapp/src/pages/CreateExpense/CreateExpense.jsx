@@ -7,19 +7,22 @@ import {
   CreateNewExpense,
   EXPENSES_COLLECTION,
   EditExpense,
+  deleteFile,
+  loadFile,
+  replaceFile,
   saveFile
 } from "../../backend/expenseLogic";
 
-import { AuthContext } from "../../common/Auth";
-import useCollection from "../../hooks/useCollection";
 import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 import { TAGS_COLLECTION } from "../../backend/tagLogic";
+import { AuthContext } from "../../common/Auth";
+import useCollection from "../../hooks/useCollection";
 import useDocument from "../../hooks/useDocument";
 import "./CreateExpense.css";
 
 export default function CreateExpense() {
   const { id } = useParams();
-  const [value, setValue] = useState(undefined);
+  const [value, setValue] = useState(0);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -51,6 +54,19 @@ export default function CreateExpense() {
         id,
         false
       );
+      if(file!=null){
+        try{
+          await replaceFile(file,id,currentUser.uid);
+        }catch{
+          alert("error in replacing file to cloud");
+        }
+      }else{
+        try{
+          await deleteFile(currentUser.uid,id);
+        }catch{
+          alert("error in deleting file to cloud");
+        }
+      }
       navigate(`/expenses/${id}`);
     } else {
       const newId = await CreateNewExpense(
@@ -61,10 +77,12 @@ export default function CreateExpense() {
         selectedAccount,
         false
       );
-      try{
-        await saveFile(file,newId,currentUser.uid);
-      }catch{
-        alert("error in saving file to cloud");
+      if(file!=null){
+        try{
+          await saveFile(file,newId,currentUser.uid);
+        }catch{
+          alert("error in saving file to cloud");
+        }
       }
       navigate(`/expenses/${newId}`);
     }
@@ -103,7 +121,18 @@ export default function CreateExpense() {
     setFile(event.target.files[0])
     loadImage(event.target.files[0]);
   };
-  
+  useEffect(() => {
+    const fetchImage = async () => {
+      const downloadURL = await loadFile(currentUser.uid, id);
+      setImage(downloadURL);
+      if(downloadURL!=null){
+        setIsDragging(true);
+      }
+    };
+    fetchImage();
+    
+  }, []);
+
   const accountsList = accounts?.docs;
   useEffect(() => {
     if (accountsList && !selectedAccount) {
@@ -155,7 +184,9 @@ export default function CreateExpense() {
               step="0.01"
               value={value}
               min="0"
-              onChange={(e) => parseFloat(setValue(e.target.value))}
+              onChange={(e) => {
+                parseFloat(setValue(e.target.value));
+              }}
             />
           </div>
           <div className="formControl">
