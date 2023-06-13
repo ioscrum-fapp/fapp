@@ -21,6 +21,7 @@ import moment from "moment";
 export default function CreateExpense() {
   const { id } = useParams();
   const [value, setValue] = useState(0);
+  const [isIncome, setIsIncome] = useState(false);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -78,7 +79,7 @@ export default function CreateExpense() {
           selectedTags.map((elem)=>elem.value),
           selectedAccount,
           id,
-          false
+          isIncome
       )
       if(file!=null){
         try{
@@ -101,7 +102,7 @@ export default function CreateExpense() {
             value,
             date,
             selectedCycle,
-            false
+            isIncome
         )
         if(file!=null){
           try{
@@ -116,7 +117,7 @@ export default function CreateExpense() {
             currentUser.uid,
             value,
             new Date(date),
-            false
+            isIncome
         );
         if(file!=null){
           try{
@@ -133,7 +134,7 @@ export default function CreateExpense() {
             date,
             selectedTags.map((elem)=>elem.value),
             selectedAccount,
-            false
+            isIncome
         );
         if(file!=null){
           try{
@@ -239,6 +240,12 @@ export default function CreateExpense() {
                   onChange={(e) => {
                     parseFloat(setValue(e.target.value));
                   }}
+              />
+              <label>Income</label>
+              <input
+                  type="checkbox"
+                  checked={isIncome}
+                  onChange={(e) => setIsIncome(e.target.checked)}
               />
             </div>
             <div className="formControl">

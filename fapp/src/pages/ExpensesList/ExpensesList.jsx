@@ -31,7 +31,7 @@ function CreateTag({ tagId }) {
 
 function CreateExpense({ expense }) {
   const { id } = expense;
-  const { value, date, tags, accountId } = expense.data();
+  const { value, date, tags, accountId, isIncome } = expense.data();
   const timestamp = new Timestamp(date.seconds, date.nanoseconds);
   const [account, ,] = useDocument(ACCOUNTS_COLLECTION, accountId);
 
@@ -45,7 +45,7 @@ function CreateExpense({ expense }) {
         </button>
       </Link>
       <div className="DetailsInfo">
-        <h1>
+        <h1 style={{color: isIncome?"green":"red"}}>
           {currency} {value}
         </h1>
         <h4>
