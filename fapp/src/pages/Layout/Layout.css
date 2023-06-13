@@ -15,7 +15,7 @@ li h1 {
   text-align: center;
   padding: 14px 0;
   text-decoration: none;
-  --ilosc-elementow: 5;
+  --ilosc-elementow: 6;
   --element-width: calc(100vw / var(--ilosc-elementow));
   width: calc(var(--element-width) - 31.5px);
   margin: 0;

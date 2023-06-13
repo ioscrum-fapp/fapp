@@ -74,6 +74,15 @@ export default function Layout() {
                   <h1 className="CurrentLocation">Planned</h1>
                 )}
               </li>
+
+              <li>
+                {location !== "tags" ? (
+                    <Link to="/tags">Categories</Link>
+                ) : (
+                    <h1 className="CurrentLocation">Categories</h1>
+                )}
+              </li>
+
               <li>
                 {" "}
                 <h1 className="CurrentLocation" onClick={() => logout()}>
