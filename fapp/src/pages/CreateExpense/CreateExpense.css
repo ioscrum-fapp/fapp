@@ -27,12 +27,12 @@
 .cancelButton {
   display: block;
   margin: 10px auto;
-  width: 50%;
   height: 5vh;
   border-radius: 10px;
   background-color: var(--cancel-dark-accent);
   border: solid 2px var(--cancel-color);
   font-size: 25px;
+  cursor: pointer;
 }
 .imageContainer {
   display: flex;
@@ -55,7 +55,6 @@ select {
   border-radius: 5px;
 }
 .submitButton {
-  width: 90%;
   height: 5vh;
   font-size: 25px;
   background-color: var(--main-dark-accent);
@@ -84,7 +83,7 @@ select {
     width: 55vw;
   }
   .cancelButton {
-    width: 55vw;
+    width: 20vw;
   }
   .dropzone {
     display: flex;
