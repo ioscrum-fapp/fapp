@@ -6,13 +6,27 @@ import {
   DeleteAccount,
 } from "../../backend/accountsLogic";
 import useDocument from "../../hooks/useDocument";
+import useCollection from "../../hooks/useCollection";
+import {EXPENSES_COLLECTION} from "../../backend/expenseLogic";
+import {where} from "@firebase/firestore";
 
 const currency = "$";
 
 export default function Account() {
   const { id } = useParams();
   const [account, isFinished, error] = useDocument(ACCOUNTS_COLLECTION, id);
+  const [expenses] = useCollection(EXPENSES_COLLECTION, where("accountId", "==", id));
+
   const navigate = useNavigate();
+
+  let sumOfExpenses = 0;
+
+  if (expenses) {
+        expenses.docs.forEach((expense) => {
+            const { value, isIncome } = expense.data();
+            sumOfExpenses += isIncome ? -1 * Number(value) : Number(value);
+        });
+  }
 
   const handleClick = async () => {
     await DeleteAccount(id);
@@ -34,7 +48,7 @@ export default function Account() {
         {account && <h1>Account: {name}</h1>}
         {account && (
           <p>
-            Balance: {currency} {balance?.toFixed(2)}
+            Balance: {(balance - sumOfExpenses).toFixed(2)} {currency}
           </p>
         )}
         {account && (

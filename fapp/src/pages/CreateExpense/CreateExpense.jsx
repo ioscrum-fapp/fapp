@@ -19,7 +19,7 @@ import "./CreateExpense.css";
 
 export default function CreateExpense() {
   const { id } = useParams();
-  const [value, setValue] = useState(undefined);
+  const [value, setValue] = useState(0);
   const [date, setDate] = useState(DateTimeToJsFormat(new Date()));
   const [selectedAccount, setSelectedAccount] = useState(undefined);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -155,7 +155,9 @@ export default function CreateExpense() {
               step="0.01"
               value={value}
               min="0"
-              onChange={(e) => parseFloat(setValue(e.target.value))}
+              onChange={(e) => {
+                parseFloat(setValue(e.target.value));
+              }}
             />
           </div>
           <div className="formControl">
