@@ -69,7 +69,7 @@ export default function PlannedExpenses() {
         ? allPlannedExpenses.map((e) => (
             <div key={e.id} className="PlannedExpenseCard">
               <div className="ExpenseValue">
-                {currency} {e.value.toFixed(2)}
+                {currency} {Number(e.value).toFixed(2)}
               </div>
               <div className="ExpenseDate">{e.date.format("YYYY-MM-DD")}</div>
               {e.type && (
