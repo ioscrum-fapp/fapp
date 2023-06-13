@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DateTimeToHumanReadableFormatDateTime from "../../backend/dateTimeLogic";
 import { Timestamp } from "@firebase/firestore";
 import { TAGS_COLLECTION } from "../../backend/tagLogic";
+import { ACCOUNTS_COLLECTION } from "../../backend/accountsLogic";
 import useDocument from "../../hooks/useDocument";
 
 const currency = "$";
@@ -30,8 +31,11 @@ function CreateTag({ tagId }) {
 
 function CreateExpense({ expense }) {
   const { id } = expense;
-  const { value, date, tags } = expense.data();
+  const { value, date, tags, accountId } = expense.data();
   const timestamp = new Timestamp(date.seconds, date.nanoseconds);
+  const [account, ,] = useDocument(ACCOUNTS_COLLECTION, accountId);
+
+  const { name } = account?.data()??{};
 
   return (
     <div className="ExpenseList-element" key={id}>
@@ -44,6 +48,9 @@ function CreateExpense({ expense }) {
         <h1>
           {currency} {value}
         </h1>
+        <h4>
+          Account: {name}
+        </h4>
         <h4>{DateTimeToHumanReadableFormatDateTime(timestamp.toDate())}</h4>
         Categories:
         {tags && tags.map((tag) => <CreateTag tagId={tag} />)}
